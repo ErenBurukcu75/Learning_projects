@@ -1,0 +1,300 @@
+html{
+    scroll-behavior: smooth;
+}
+
+
+.container{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+   
+    background-color: black;
+}
+.yazilar_baslik{
+    color: white;
+    font-family: 'Consolas', monospace;
+    font-size: 30px;
+}
+.tags{
+    display: flex;
+    position: absolute;
+    top: 9%;
+    left: 73%;
+    gap: 50px;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: white;
+    width: 22%;
+    height: 80px;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    
+   
+}
+
+.tags a{
+    text-decoration-color: green;
+    cursor: pointer;
+    
+    color: white;
+}
+
+#site_ad{
+    position: absolute;
+    top: 10%;
+    left: 12.5%;
+    font-size: 40px;
+    
+}
+
+.ana_yazi {
+    position: absolute;
+    top: 150%;
+    left: 27%;
+    width: 45%;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    border: 2px solid white;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(5, 5, 5, 0.2);
+
+  }
+ 
+
+  .Planets {
+    
+    position: absolute;
+    top: 200%;
+    left: 27%;
+    font-size: 20px;
+ 
+
+
+  }
+  .hidden h3{
+
+    margin-left: 29%;
+    font-size: 30px;
+    
+   
+    
+  }
+  .hidden p{
+ 
+    
+    margin-right: 500px;
+    font-size: 20px;
+    border-radius: 30px;
+    border: 2px solid #ffffff;
+    padding: 15px;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    
+    
+    
+ 
+  }
+
+
+  .hidden {
+
+
+    opacity: 0;
+    transform: translateY(20px);
+    margin-bottom: 200px;
+    
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+
+
+}
+
+
+
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.highlight {
+    color: red;
+    font-style: italic;
+}
+
+
+#section1 {
+    opacity: 0;
+    height: 1850px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+
+#section2 {
+    opacity: 0;
+    height: 920px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section3 {
+    opacity: 0;
+    height: 930px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section4 {
+    opacity: 0;
+    height: 910px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section5 {
+    opacity: 0;
+    height: 800px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section6 {
+    opacity: 0;
+    height: 850px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section7{
+    opacity: 0;
+    height: 810px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section8 {
+    opacity: 0;
+    height: 810px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+#section9 {
+    opacity: 0;
+    height: 920px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    margin-top: 20px;
+}
+
+.gorsel_tikla{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    
+}
+
+.gorsel_tikla img{
+    width: 100%;
+    position: absolute;
+    height: auto;
+    bottom: 4030%;
+    
+}
+
+.gorsel_tikla button{
+    position: absolute;
+      background-color: transparent;
+      color: white;
+      border: none;
+      opacity: 0;
+      padding: 10px;
+      pointer-events: auto;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .gorsel_tikla #btn1{
+        bottom: 4320%;
+        left: 74.4%;
+    }
+
+    .gorsel_tikla #btn2{
+        bottom: 4325%;
+        left: 67.6%;
+        width: 80px;
+        height: 60px;
+    }
+
+    .gorsel_tikla #btn3{
+        bottom: 4330%;
+        left: 57.5%;
+        height: 120px;
+        width: 120px;
+    }
+
+    .gorsel_tikla #btn4{
+        bottom: 4355%;
+        left: 47.6%;
+        height: 100px;
+        width: 100px;
+    }
+
+    .gorsel_tikla #btn5{
+        bottom: 4323%;
+        left: 33%;
+        height: 170px;
+        width: 170px;
+    }
+
+    .gorsel_tikla #btn6{
+        bottom: 4387%;
+        left: 21%;
+        height: 150px;
+        width: 150px;
+    }
+
+    .gorsel_tikla #btn7{
+        bottom: 4460%;
+        left: 9.5%;
+        height: 130px;
+        width: 130px;
+    }
+
+    .gorsel_tikla #btn8{
+        bottom: 4530%;
+        left: 1.5%;
+        height: 110px;
+        width: 110px;
+    }
+
+    .fixed-button {
+        position: fixed;
+        top: 50%;
+        right: 60px;
+        transform: translateY(-50%);
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+ 
