@@ -15,6 +15,7 @@ html{
     box-sizing: border-box;
    
     background-color: black;
+    z-index: -20;
 }
 .yazilar_baslik{
     color: white;
@@ -296,3 +297,13 @@ html{
         z-index: 1000;
     }
  
+.info11{
+    position: absolute;
+    
+    top: 10%;
+    left: 43%;
+    color: white;
+    border-radius: 30px;
+    border: 2px solid white;
+    padding: 20px;
+}
