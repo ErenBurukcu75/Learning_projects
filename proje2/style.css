@@ -35,14 +35,12 @@ html{
     justify-content: center;
     align-items: center;
     padding-bottom: 5px;
-    
    
 }
 
 .tags a{
     text-decoration-color: green;
     cursor: pointer;
-    
     color: white;
 }
 
