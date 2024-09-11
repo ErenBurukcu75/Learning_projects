@@ -1,0 +1,63 @@
+
+<mvc:View
+controllerName="ui5.databinding.controller.App"
+	xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+   
+	xmlns:mvc="sap.ui.core.mvc">
+    
+    
+    
+    <Panel headerText="{i18n>panelHeaderText}" class = "sapUiResponsiveMargin" width="auto">
+    <form:SimpleForm editable="true" layout="ColumnLayout">
+      <Label text="{i18n>firstName}"/>
+      <Input value="{/firstName}" valueLiveUpdate="true" width="200px" enabled="{/enabled}" placeholder="İsim giriniz"/>
+    <Label text="{i18n>lastName}"/>
+	<Input value="{/lastName}" valueLiveUpdate="true" width="200px" enabled="{/enabled}" placeholder="Soyisim giriniz"/>
+
+    <!-- eMail kısmı -->
+    <Label text="{i18n>mailID}"/>
+    <Input value="{/mailID}" valueLiveUpdate="true" width="200px" enabled="{/enabled}" placeholder="test@example.com"/>
+
+ 
+    <!-- Başlık kısmı -->
+    <Label text="{i18n>mailHead1}"/>
+    <Input value="{/mailHead}" id="yazitest" valueLiveUpdate="true" width="200px" enabled="{/enabled}" placeholder="Title giriniz" />
+    
+     <!-- Gövde kısmı -->
+    <Label text="{i18n>mailBody1}"/>
+    <Input value="{/mailBody}" class="govdetest" valueLiveUpdate="true" width="200px" enabled="{/enabled}" placeholder="Gövde giriniz" />
+
+    
+    
+    <Label text="{i18n>enable}"/>
+			<CheckBox selected="{/enabled}"/>
+
+           
+
+
+        </form:SimpleForm>
+
+    </Panel>
+    <Panel headerText="Mail ayarları" class="sapUiResponsiveMargin" width="auto">
+		<content>
+			<l:VerticalLayout>
+				<Label labelFor="address" text="Maili görüntüle : "/>
+				
+                    <Link href="{
+						parts: [
+							'/firstName',
+							'/lastName',
+                            '/mailID',
+                            '/mailHead',
+                            '/mailBody'
+						],
+						formatter: '.formatMail'
+					}"
+					text="{i18n>sendEmail}"/>
+			</l:VerticalLayout>
+          
+		</content>
+	</Panel>
+</mvc:View>
