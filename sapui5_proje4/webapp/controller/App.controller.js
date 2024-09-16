@@ -6,7 +6,7 @@ sap.ui.define([
 
 	return Controller.extend("ui5.databinding.controller.App", {
 		formatMail(sFirstName, sLastName , sMail, sHead , sBody) {
-			const oBundle = this.getView().getModel("i18n").getResourceBundle();
+			const oBundle = this.getView().getModel("i18n").getResourceBundle(); 
             const tag = "from " + sFirstName + " "+ sLastName;
         
 
