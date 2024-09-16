@@ -1,0 +1,16 @@
+/* Enter your custom styles here */
+
+.confirmDeleteButtonContainer {
+    position: fixed;
+
+    bottom: 20px;
+    right: 250px;
+    z-index: 1000; /* Butonun diğer öğelerin üstünde görünmesini sağlar */
+}
+
+.confirmDeleteButton {
+
+    width: 100px !important;
+    /* height: 200px !important; */
+
+}
