@@ -1,0 +1,24 @@
+<mvc:View
+    controllerName="project1.controller.Contact.Contact"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page
+        id="ContactPage"
+        title="Contact"
+        showNavButton="true"
+		navButtonPress=".onNavBack"
+        >
+        <content>
+            <VBox class="sapUiSmallMargin">
+                <Text text="Contact Information" />
+                <Label text="Name" />
+                <Input id="nameInput" placeholder="Enter your name" />
+                <Label text="Email" />
+                <Input id="emailInput" placeholder="Enter your email" type="Email" />
+                <Label text="Message" />
+                <TextArea id="messageInput" placeholder="Enter your message" rows="4" />
+                <Button text="Submit" press="onSubmit" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

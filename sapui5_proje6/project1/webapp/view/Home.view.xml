@@ -1,0 +1,47 @@
+<mvc:View
+    controllerName="project1.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page
+        id="HomePage"
+        title="Home">
+        <subHeader>
+            <Toolbar>
+                <Title text="My Application" />
+                <ToolbarSpacer />
+                <Button text="Home" press=".onNavToHome" />
+                <Button text="Invoices" press=".onNavToInvoice"/>
+                <Button text="Contact" press=".onNavToContact" />
+                <Button text="About" press=".onNavToAbout" />
+            </Toolbar>
+        </subHeader>
+        <content>
+          <!-- <VBox fitContainer="true" alignItems="Center">
+                <Image src="https://placehold.co/600x400/orange/white" alt="Banner Image" width="100%" />
+                <Text text="Welcome to Our Application" class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
+                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
+                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
+                <Button text="Learn More" press=".onNavToAbout" class="sapUiSmallMarginTop" />
+            </VBox> -->
+            <Table id="myTable" items="{/EntitySet}">
+  <columns>
+    <Column>
+      <Text text="Column1" />
+    </Column>
+    <Column>
+      <Text text="Column2" />
+    </Column>
+  </columns>
+  <items>
+    <ColumnListItem>
+      <cells>
+        <Text text="{Column1}" />
+        <Text text="{Column2}" />
+      </cells>
+    </ColumnListItem>
+  </items>
+</Table>
+        </content>
+    </Page>
+</mvc:View>

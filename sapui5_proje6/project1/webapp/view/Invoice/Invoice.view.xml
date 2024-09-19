@@ -1,0 +1,26 @@
+<mvc:View
+controllerName="project1.controller.Invoice.Invoice"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+
+   <Page 
+    id="InvoicePage"
+        title="Invoices"
+        showNavButton="true"
+		  navButtonPress=".onNavBack"
+      >
+   <List
+      headerText="{i18n>invoiceListTitle}"
+      class="sapUiResponsiveMargin"
+      width="auto"
+      items="{InvoiceList>/Invoices}" 
+      >
+      <items>
+         <ObjectListItem
+            title="{InvoiceList>Quantity} x {InvoiceList>ProductName}"/>
+      </items>
+   </List>
+
+    </Page>
+   
+</mvc:View>

@@ -1,0 +1,40 @@
+<mvc:View
+    controllerName="project1.controller.About.About"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page
+        id="AboutPage"
+        title="About Us"
+        showNavButton="true"
+		navButtonPress=".onNavBack"
+        >
+        <content>
+            <VBox fitContainer="true" alignItems="Center">
+                <Image src="https://via.placeholder.com/800x200" alt="About Us Banner" width="100%" />
+                <Text text="About Our Company"  class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
+                <Text text="Our Mission"  class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
+                <Text text="Our Team"  class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+                <HBox class="sapUiSmallMarginBottom" justifyContent="Center">
+                    <VBox alignItems="Center" class="sapUiSmallMargin">
+                        <Image src="https://via.placeholder.com/150" alt="Team Member 1" />
+                        <Text text="Jane Doe"  />
+                        <Text text="CEO  Founder" />
+                    </VBox>
+                    <VBox alignItems="Center" class="sapUiSmallMargin">
+                        <Image src="https://via.placeholder.com/150" alt="Team Member 2" />
+                        <Text text="John Smith" />
+                        <Text text="CTO" />
+                    </VBox>
+                    <VBox alignItems="Center" class="sapUiSmallMargin">
+                        <Image src="https://via.placeholder.com/150" alt="Team Member 3" />
+                        <Text text="Emily Johnson" />
+                        <Text text="COO" />
+                    </VBox>
+                </HBox>
+                <Button text="Contact Us" press=".onContactUs" class="sapUiSmallMarginTop" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,44 @@
+{
+    "Invoices": [
+        {
+            "ProductName": "Laptop",
+            "Quantity": 5,
+            "ExtendedPrice": 7500.0,
+            "ShipperName": "Tech Express",
+            "ShippedDate": "2024-09-01T00:00:00",
+            "Status": "A"
+        },
+        {
+            "ProductName": "Smartphone",
+            "Quantity": 10,
+            "ExtendedPrice": 15000.0,
+            "ShipperName": "Quick Delivery",
+            "ShippedDate": "2024-08-18T00:00:00",
+            "Status": "B"
+        },
+        {
+            "ProductName": "Smart TV",
+            "Quantity": 3,
+            "ExtendedPrice": 12000.0,
+            "ShipperName": "Fast Freight",
+            "ShippedDate": "2024-07-02T00:00:00",
+            "Status": "C"
+        },
+        {
+            "ProductName": "Wireless Headphones",
+            "Quantity": 15,
+            "ExtendedPrice": 4500.0,
+            "ShipperName": "Tech Express",
+            "ShippedDate": "2024-06-12T00:00:00",
+            "Status": "A"
+        },
+        {
+            "ProductName": "Gaming Console",
+            "Quantity": 7,
+            "ExtendedPrice": 21000.0,
+            "ShipperName": "Quick Delivery",
+            "ShippedDate": "2024-05-27T00:00:00",
+            "Status": "B"
+        }
+    ]
+}
