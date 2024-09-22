@@ -12,6 +12,7 @@ sap.ui.define([
  
          onInit: function() {
              this.getOwnerComponent().getRouter().initialize();
+             //Kontrol amaçlı
              console.log("Component initialized.");
             
 
