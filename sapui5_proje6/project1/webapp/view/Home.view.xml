@@ -87,7 +87,6 @@
                 <DatePicker id="employeeStartDate" 
                     displayFormat="dd.MM.yyyy" 
                     valueFormat="yyyy-MM-dd"/>
-
                 <Label text="Yönetici Numarası" />
                 <ComboBox id="managerNumber" />
             </VBox>

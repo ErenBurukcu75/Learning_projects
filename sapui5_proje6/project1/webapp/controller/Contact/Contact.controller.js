@@ -13,7 +13,6 @@ sap.ui.define([
             var sEmail = this.byId("emailInput").getValue();
             var sMessage = this.byId("messageInput").getValue();
 
-            // Burada form verilerini işleyebilirsiniz
             sap.m.MessageToast.show("Form submitted: " + sName + ", " + sEmail + ", " + sMessage);
         }
     });

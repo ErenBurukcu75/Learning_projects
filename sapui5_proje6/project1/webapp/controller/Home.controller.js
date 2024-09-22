@@ -152,7 +152,7 @@ sap.ui.define([
             for (var i = 0; i < rowids.length; i++) {
                 var row = tb.getRows()[rowids[i]];
                 var cells = row.getCells();
-                var pernrValue = cells[3].getText(); // Dördüncü sütun
+                var pernrValue = cells[3].getText(); // Dördüncü sütun(pernr sütun)
 
                 pernrList.push(pernrValue);
                 
@@ -192,8 +192,9 @@ sap.ui.define([
 
 
         onRequestButtonPress: function () {
-            var Processname = "GetList"; // Örnek işlem adı
-            var Jsondata = {}; // Gönderilecek veri
+            // her tıklanıldığında güncel veriyi çeker 
+            var Processname = "GetList"; 
+            var Jsondata = {};
             var that = this;
             this.request(Processname, Jsondata)
                 .then(function(result) {
