@@ -4,11 +4,10 @@
 
 sap.ui.define([
         "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "project1/model/models",
-        "sap/ui/model/odata/v2/ODataModel"
+        "project1/model/models"
+    
     ],
-    function (UIComponent, Device, models, ODataModel) {
+    function (UIComponent, models ) {
         "use strict";
 
         return UIComponent.extend("project1.Component", {
@@ -28,24 +27,7 @@ sap.ui.define([
                 // enable routing
                 this.getRouter().initialize();
 
-                var oModel = new ODataModel("https://fioridev.vesa-tech.com/sap/opu/odata/sap/ZIHS_EDUCATION_SRV/", {
-                    json : true,
-                    loadMetadataAsync: true
-                });
 
-                oModel.attachRequestCompleted(function() {
-                    console.log("OData request completed successfully.");
-                  });
-            
-                  oModel.attachRequestFailed(function() {
-                    console.error("OData request failed.");
-                  });
-
-
-            this.setModel(oModel);
-
-                // set the device model
-                this.setModel(models.createDeviceModel(), "device");
             }
         });
     }

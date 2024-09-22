@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "https://fioridev.vesa-tech.com/sap/opu/odata/sap/ZIHS_EDUCATION_SRV/",
+        "uri": "/sap/opu/odata/sap/ZIHS_EDUCATION_SRV/",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0"
@@ -69,10 +69,7 @@
       },
       "": {
         "dataSource": "mainService",
-        "settings": {
-          "synchronizationMode": "None",
-          "operationMode": "Server"
-        }
+        "preload": true
       }
     },
     "resources": {

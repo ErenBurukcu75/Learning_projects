@@ -1,7 +1,8 @@
 <mvc:View
     controllerName="project1.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table">
     <Page
         id="HomePage"
         title="Home">
@@ -13,35 +14,90 @@
                 <Button text="Invoices" press=".onNavToInvoice"/>
                 <Button text="Contact" press=".onNavToContact" />
                 <Button text="About" press=".onNavToAbout" />
+                <Button text="Request Gönder" press=".onRequestButtonPress" />
+
+                
             </Toolbar>
         </subHeader>
         <content>
-          <!-- <VBox fitContainer="true" alignItems="Center">
-                <Image src="https://placehold.co/600x400/orange/white" alt="Banner Image" width="100%" />
-                <Text text="Welcome to Our Application" class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
-                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
-                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
-                <Text text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque leo nec urna fermentum, a tincidunt nisi facilisis. Integer nec odio vel nulla facilisis tincidunt." class="sapUiSmallMarginBottom" />
-                <Button text="Learn More" press=".onNavToAbout" class="sapUiSmallMarginTop" />
-            </VBox> -->
-            <Table id="myTable" items="{/EntitySet}">
-  <columns>
-    <Column>
-      <Text text="Column1" />
-    </Column>
-    <Column>
-      <Text text="Column2" />
-    </Column>
-  </columns>
-  <items>
-    <ColumnListItem>
-      <cells>
-        <Text text="{Column1}" />
-        <Text text="{Column2}" />
-      </cells>
-    </ColumnListItem>
-  </items>
-</Table>
+       
+       <table:Table
+                id="employeeTable1"
+                rows="{/veriler}">
+                <table:title>
+                    <Text text="Employee List"/>
+                </table:title>
+                <table:columns>
+                    <table:Column>
+                        <Label text="Name"/>
+                        <table:template>
+                            <Text text="{ename}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column>
+                     <Label text="Deparman"/>
+                        <table:template>
+                            <Text text="{plntx}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column>
+                     <Label text="Başlama Tarihi"/>
+                        <table:template>
+                            <Text text="{path: 'begda', formatter: '.formatter.formatDate'}"/>
+                        </table:template>
+                    </table:Column>
+                    <table:Column>
+                        <Label text="Sicil No"/>
+                        <table:template>
+                            <Text text="{pernr}"/>
+                        </table:template>
+                    </table:Column>
+                     <table:Column>
+                     <Label text="Yönetici Sicil No"/>
+                        <table:template>
+                            <Text text="{parts: [{path: 'mangr'}, {path: '/veriler'}], formatter: '.formatter.formatMangr'}"/>
+                        </table:template>
+                    </table:Column>
+
+                </table:columns>
+                  
+            </table:Table>
+
         </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Sil" press=".onDeleteEmployee"/>
+                <Button text="Ekle" press=".onOpenDialog"/>
+            </Toolbar>
+        </footer>
+        <Dialog
+        id="employeeDialog"
+        title="Çalışan Ekle"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+        draggable="true"
+        resizable="true">
+        <content>
+            <VBox>
+                <Label text="İsim" />
+                <Input id="employeeName" />
+                <Label text="Departman" />
+                <Input id="employeeDept" />
+                <Label text="Başlangıç Tarihi" />
+                <DatePicker id="employeeStartDate" 
+                    displayFormat="dd.MM.yyyy" 
+                    valueFormat="yyyy-MM-dd"/>
+
+                <Label text="Yönetici Numarası" />
+                <ComboBox id="managerNumber" />
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Ekle" press=".onAddEmployee" />
+        </beginButton>
+        <endButton>
+            <Button text="İptal" press=".onCloseDialog" />
+        </endButton>
+    </Dialog>
     </Page>
 </mvc:View>

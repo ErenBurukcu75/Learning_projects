@@ -16,6 +16,9 @@ server:
             - /resources
             - /test-resources
           url: https://ui5.sap.com
+        backend:
+          - path: /sap
+            url: https://fioridev.vesa-tech.com  
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -27,3 +30,4 @@ server:
       configuration:
         component: project1
         ui5Theme: sap_horizon
+   
