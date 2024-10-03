@@ -1,0 +1,40 @@
+/* Enter your custom styles here */
+.customObjectStatus {
+    font-size: 15px !important; /* Medium boyut için */
+    /* Diğer stil özellikleri */
+}
+
+.customStateCritical {
+    color: #FF0000 !important; /* Kırmızı */
+    font-size: 15px !important;
+}
+
+.customStateWarning {
+    color: #FFA500 !important; /* Turuncu */
+    font-size: 15px !important;
+}
+
+.customStateSuccess {
+    color: #008000 !important; /* Yeşil */
+    font-size: 15px !important;
+}
+
+.customStateInformation {
+    color: #0000FF !important; /* Mavi */
+    font-size: 15px !important;
+}
+
+.customLink {
+    color: black !important; 
+    text-decoration: none !important; 
+    user-select: none !important;
+    background-color: transparent !important; 
+}
+
+.customLink:active {
+    background-color: transparent !important; 
+}
+.redButton {
+    background-color: red !important;
+}
+

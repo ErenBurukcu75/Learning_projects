@@ -1,0 +1,325 @@
+<mvc:View
+    controllerName="project1.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+	xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+    <f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Employee Table"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Content -->
+		<f:content>
+			<VBox fitContainer="true">
+				<OverflowToolbar class="sapFDynamicPageAlignContent">
+					<ToolbarSpacer/>
+					<SearchField search=".onSearch" width="17.5rem"/>
+					
+					<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>
+					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press=".openPopover"/>
+                    <OverflowToolbarButton text="click me" press=".onRequestButtonPress"/>
+				</OverflowToolbar>
+				<Table mode="SingleSelectMaster" selectionChange="onRowSelect"
+					id="employeeTable"
+					inset="false"
+					items="{/veriler}"
+					class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
+					width="auto">
+					<columns>
+                <Column>
+                    <header>
+                        <Link text="ID" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="ID"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Sicil No" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="persno"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="İsim" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="Name"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Departman" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="departman"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Müşteri" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="Müşteri"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Başlama Tarihi" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="BegDate"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Bitiş Tarihi" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="EndDate"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="İş Detay" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="isDetay"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Durum" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="Durum"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column width="5em">
+                    <header>
+                        <Link text="Efor" press=".onColumnHeaderPress" class="customLink" >
+                            <customData>
+                                <core:CustomData key="columnKey" value="Efor"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column >
+                    <header>
+                      <Link text="İşlem" press=".onColumnHeaderPress" class="customLink">
+                          <customData>
+                            <core:CustomData key="columnKey" value="İşlem"/>
+                          </customData>
+                      </Link>
+                    
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Müşteri Yorumu" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="MusteriYorumu"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Personel Yorumu" press=".onColumnHeaderPress" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="PersonelYorumu"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column width="4em" >
+                   
+                </Column>
+                 <Column width="4em">
+                   
+                </Column>
+            </columns>
+					<items>
+						<ColumnListItem >
+							<cells>
+							<Text text="{islemId}"/>
+                            <Text text="{pernr}"/>
+							<Text text="{calisanAdi}"/>
+                            <Text text="{departman}"/>
+                            <Text text="{musteri}"/>
+                            <Text text="{path: 'baslama', formatter: '.formatter.formatDate'}"/>
+                            <Text text="{path: 'asilBitis', formatter: '.formatter.formatDate'}"/>
+                            <Text text="{is_detay}"/>  
+						<ObjectStatus
+							class="customObjectStatus"
+							text="{path: 'durum', formatter: '.formatter.formatOnemlilik'}"
+							state="{StateCol}" /> 
+						    <Text text="{efor}"/>
+                            <ObjectStatus
+                            class="customObjectStatus"
+                            text="{path: 'islem', formatter: '.formatter.formatDurum'}"
+                            state="{StateCol1}"/>
+                            <Text text="{musteriYorumu}"/>
+                            <Text text="{personelYorumu}"/>
+                            <Button  icon="sap-icon://edit" press=".onEdit"/>
+                            <Button 
+                            icon="sap-icon://delete" press=".deleteRow"
+                            type="Negative"
+                            />
+							</cells>
+						</ColumnListItem>
+					</items>
+                    
+				</Table>
+			</VBox>
+		</f:content>
+
+		<!-- DynamicPage Footer -->
+		<f:footer >
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button type="Accept" text="Accept"/>
+				<Button type="Reject" text="Reject"/>
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+
+	 <Dialog id="addDialog" title="Add New Entry">
+        <VBox class= "sapUiSmallMargin">
+            <Label text="ID"/>
+            <Input id="inputID" editable="false"/>
+            <Label text="Sicil no "/>
+            <Input id="inputPernr"/>
+            <Label text="İsim"/>
+            <Input id="inputName"/>
+            <Label text="Departman"/>
+            <Input id="inputDepartman"/>
+            <Label text="Müşteri"/>
+            <Input id="inputMusteri"/>
+            <Label text="Başlama Tarihi"/>
+            <DatePicker id="inputBegDate"/>
+            <Label text="Bitiş Tarihi"/>
+            <DatePicker id="inputEndDate"/>
+            <Label text="İş Detay"/>
+            <Input id="inputIsDetay"/>
+            <Label text="İşlem"/>
+            <ComboBox id="inputIslem" width="100%">
+                <items>
+                    <core:Item key="0" text="Başlanmadı"/>
+                    <core:Item key="1" text="Beklemede"/>
+                    <core:Item key="2" text="Devam ediyor"/>
+                    <core:Item key="3" text="Tamamlandı"/>
+                </items>
+            </ComboBox>
+            <Label text="Durum"/>
+            <ComboBox id="inputDurum" width="100%">
+                <items>
+                    <core:Item key="0" text="Az Önemli"/>
+                    <core:Item key="1" text="Orta"/>
+                    <core:Item key="2" text="Kritik"/>
+                    <core:Item key="3" text="Çok Kritik"/>
+                </items>
+            </ComboBox>
+            <Label text="Efor"/>
+            <Input id="inputEfor"/>
+             <Label text="Müşteri Yorumu"/>
+            <TextArea id="inputMusteriYorumu" width="100%" rows="4"/>
+            <Label text="Personel Yorumu"/>
+            <TextArea id="inputPersonelYorumu" width="100%" rows="4"/>
+        </VBox>
+        <endButton>
+            <Button text="Cancel" press="onCancel"/>
+        </endButton>
+        <beginButton>
+            <Button text="Add" press="onAddConfirm"/>
+        </beginButton>
+    </Dialog>
+
+	<Popover id="sortPopover" placement="Bottom" title="Filtre Sıralaması">
+    <VBox>
+        <RadioButton text="ID" groupName="sortGroup"  select=".oRadioButtonSelect"/>
+        <RadioButton text="İsim" groupName="sortGroup" select=".onRadioButtonSelect"/>
+        <RadioButton text="Müşteri" groupName="sortGroup" select=".onRadioButtonSelect" />
+        <RadioButton text="Durum" groupName="sortGroup" select=".onRadioButtonSelect" />
+        <RadioButton text="Efor" groupName="sortGroup" select=".onRadioButtonSelect" />
+		<Button text="Ok" press= ".onOkPress"/>
+		
+    </VBox>
+
+    
+
+        <Dialog id="myDialog1" title="My Popup">
+            <VBox class= "sapUiSmallMargin">
+                    <Label text="ID"/>
+                    <Input id="dialogId"  />
+                    <Label text="Sicil no"/>
+                    <Input id="dialogPernr"/>
+                    <Label text="Name"/>
+                    <Input id="dialogName"   />
+                    <Label text="Departman"/>
+                    <Input id="dialogDepartman"/>
+                    <Label text="Müşteri"/>
+                    <Input id="dialogMusteri"/>
+                    <Label text="Başlama Tarihi"/>
+            <DatePicker id="dialogBegDate"
+             displayFormat="dd.MM.yyyy" 
+                    valueFormat="yyyy-MM-dd"/>
+            <Label text="Bitiş Tarihi"/>
+            <DatePicker id="dialogEndDate"
+             displayFormat="dd.MM.yyyy" 
+                    valueFormat="yyyy-MM-dd"/>
+            <Label text="İşlem"/>
+            <ComboBox id="dialogIslem" width="100%">
+                <items>
+                    <core:Item key="0" text="Başlanmadı"/>
+                    <core:Item key="1" text="Beklemede"/>
+                    <core:Item key="2" text="Devam ediyor"/>
+                    <core:Item key="3" text="Tamamlandı"/>
+                </items>
+            </ComboBox>
+            <Label text="Durum"/>
+            <ComboBox id="dialogDurum" width="100%">
+                <items>
+                    <core:Item key="0" text="Az Önemli"/>
+                    <core:Item key="1" text="Orta"/>
+                    <core:Item key="2" text="Kritik"/>
+                    <core:Item key="3" text="Çok Kritik"/>
+                </items>
+            </ComboBox>
+             <Label text="Efor"/>
+            <Input id="dialogEfor"/>
+            <Label text="Müşteri Yorumu"/>
+             <TextArea id="dialogMusteriYorumu" width="100%" rows="4"/>
+        <Label text="Personel Yorumu"/>
+        <TextArea id="dialogPersonelYorumu" width="100%" rows="4"/>
+                </VBox>
+         <endButton>
+            <Button text="Cancel" press="onClosePopup"/>
+        </endButton>
+            <beginButton>
+                <Button text="OK" press="onSetPopup" />
+            </beginButton>
+        </Dialog>
+
+       
+</Popover>
+</mvc:View>

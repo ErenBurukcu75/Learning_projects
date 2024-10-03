@@ -172,7 +172,7 @@ sap.ui.define([
             
     try {
         let result =  that.request.bind(that)(Processname, Jsondata);
-        MessageToast.show("Çalışan başarıyla silindi.");
+        MessageToast.show("Çalı1şan başarıyla silindi.");
         console.log("Employee deleted successfully:", result);
         console.log("AAAA")
         setTimeout(function() {
@@ -196,9 +196,13 @@ sap.ui.define([
             var Processname = "GetList"; 
             var Jsondata = {};
             var that = this;
-            this.request(Processname, Jsondata)
+            this.request("GetList", Jsondata)
                 .then(function(result) {
                 var oModel = new JSONModel();
+                // result.forEach((element,i,arr) =>{
+
+                //     arr[i].new = "X"
+                // });
                 oModel.setData({ veriler: result});
                 that.getView().setModel(oModel);
                 console.log("Request başarılı: " + JSON.stringify(result));

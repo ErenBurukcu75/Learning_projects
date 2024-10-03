@@ -1,0 +1,18 @@
+<mvc:View controllerName="todo.project.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    displayBlock="true">
+    
+    <App id="app">
+        <f:FlexibleColumnLayout id="flexibleColumnLayout" backgroundDesign="Solid">
+            <f:beginColumnPages>
+                <mvc:XMLView id="beginView" viewName="todo.project.view.TabloPage"/>
+            </f:beginColumnPages>
+            <f:midColumnPages>
+                <mvc:XMLView id="detailView" viewName="todo.project.view.Detail"/>
+            </f:midColumnPages>
+        </f:FlexibleColumnLayout>
+    </App>
+</mvc:View>

@@ -1,0 +1,91 @@
+{
+    "Invoices": [
+        {
+            "ID" : "1",
+            "persno" : "1",
+            "Name": "John Doe",
+            "Müşteri": "Azercell",
+            "BegDate" : "2022-01-01",
+            "EndDate" : "2022-12-31",
+            "MusteriYorumu" : "Kontrol komutu eklenmeli",
+            "PersonelYorumu" : "Kontrol komutu sisteme entegre edilemez",
+            "isDetay" : "***",
+            "Durum" : "Çok kritik",
+            "Efor" : "5",
+            "İşlem" : "Tamamlandı"
+           
+        },
+        {
+            "ID" : "2",
+            "persno" : "2",
+            "Name": "Jane Smith",
+            "Müşteri": "Turkcell",
+            "BegDate" : "2023-02-15",
+            "EndDate" : "2023-11-30",
+            "MusteriYorumu" : "Raporlama modülü güncellenmeli",
+            "PersonelYorumu" : "Raporlama modülü güncellenebilir",
+            "isDetay" : "***",
+            "Durum" : "Orta",
+            "Efor" : "7",
+            "İşlem" : "Başlanmadı"
+        },
+        {
+            "ID" : "3",
+            "persno" : "3",
+            "Name": "Alice Johnson",
+            "Müşteri": "Vodafone",
+            "BegDate" : "2023-03-01",
+            "EndDate" : "2023-12-31",
+            "MusteriYorumu" : "Yeni kullanıcı eklenmeli",
+            "PersonelYorumu" : "Yeni kullanıcı eklenebilir",
+            "isDetay" : "***",
+            "Durum" : "Az Önemli",
+            "Efor" : "10",
+            "İşlem" : "Beklemede"
+        },
+        {
+            "ID" : "4",
+            "persno" : "4",
+            "Name": "Bob Brown",
+            "Müşteri": "Türk Telekom",
+            "BegDate" : "2022-05-01",
+            "EndDate" : "2022-12-31",
+            "MusteriYorumu" : "Sistem yedekleme yapılmalı",
+            "PersonelYorumu" : "Sistem yedekleme yapılabilir",
+            "isDetay" : "***",
+            "Durum" : "Kritik",
+            "Efor" : "21",
+            "İşlem" : "Tamamlandı"
+        },
+        {
+            "ID" : "5",
+            "persno" : "5",
+            "Name": "Charlie Davis",
+            "Müşteri": "Avea",
+            "BegDate" : "2023-01-01",
+            "EndDate" : "2023-12-31",
+            "MusteriYorumu" : "Güvenlik güncellemesi yapılmalı",
+            "PersonelYorumu" : "Güvenlik güncellemesi yapılabilir",
+            "isDetay" : "***",
+            "Durum" : "Çok kritik",
+            "Efor" : "2",
+            "İşlem" : "Beklemede"
+           
+        },
+        {
+            "ID" : "6",
+            "persno" : "6",
+            "Name": "Diana Evans",
+            "Müşteri": "Superonline",
+            "BegDate" : "2023-04-01",
+            "EndDate" : "2023-12-31",
+            "MusteriYorumu" : "Veri tabanı optimizasyonu yapılmalı",
+            "PersonelYorumu" : "Veri tabanı optimizasyonu yapılabilir",
+            "isDetay" : "***",
+            "Durum" : "Orta",
+            "Efor" : "7",   
+            "İşlem" : "Tamamlandı"
+        }
+        
+    ]
+}

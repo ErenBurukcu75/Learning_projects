@@ -1,0 +1,141 @@
+<mvc:View
+	controllerName="project1.controller.Detail"
+	xmlns="sap.uxap"
+	xmlns:m="sap.m"
+	xmlns:f="sap.f"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc">
+	<ObjectPageLayout
+		id="ObjectPageLayout"
+		showTitleInHeaderContent="true"
+		alwaysShowContentHeader="false"
+		preserveHeaderStateOnScroll="false"
+		headerContentPinnable="false"
+		isChildPage="true"
+		upperCaseAnchorBar="false">
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+				<actions>
+					<m:Button
+						
+						icon="sap-icon://decline"
+						type="Neutral"
+                        press="onListItemPress"/>	
+					<m:Button 
+					 icon="sap-icon://accept"
+					 press="checkLog"
+					/>	
+				</actions>
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+		  <m:HBox justifyContent="Center">
+		  <m:Title text="Detail Employee Page" level="H1" />
+		  </m:HBox>
+			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+				<m:Avatar
+					displaySize="L"
+					displayShape="Square"
+					class="sapUiTinyMarginEnd">
+				</m:Avatar>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="Sicil No"/>
+							<m:Text text="{selectedRow>/pernr}"/>
+				</m:VBox>
+				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="Name"/>
+							<m:Text text="{selectedRow>/calisanAdi}"/>
+				</m:VBox>
+
+				
+	
+			</m:FlexBox>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection title="General Information">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								<form:content>
+									<m:Label text="ID"/>
+									<m:Text text="{selectedRow>/islemId}"/>
+									<m:Label text="Name"/>
+									<m:Text text="{selectedRow>/calisanAdi}"/>
+									<m:Label text="Müşteri"/>
+									<m:Text text="{selectedRow>/Müşteri}"/>
+									<m:Label text="Personel Yorumu"/>
+									<m:Text text="{selectedRow>/personelYorumu}"/>
+									<m:Label text="Müşteri Yorumu"/>
+									<m:Text text="{selectedRow>/musteriYorumu}"/>
+									<m:Label text="iş Detayı"/>
+									<m:Text text="{selectedRow>/isDetay}"/>
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection title="Log">
+				<subSections>
+				  
+					<ObjectPageSubSection>
+					  
+						<m:VBox fitContainer="true" >
+						<m:OverflowToolbar  class="sapFDynamicPageAlignContent">
+						<m:ToolbarSpacer/>
+                    <m:SearchField search=".onSearch" width="17.5rem"/>
+					</m:OverflowToolbar>
+                
+			
+						
+							<m:Table
+								id="logTable"
+								items="{Invoice>/Invoices}"
+								>
+								<m:columns>
+								
+								<m:Column >
+								    <m:Text text="Tarih"/>
+								</m:Column>
+								<m:Column >
+								    <m:Text text="Saat"/>
+								</m:Column>
+								<m:Column>
+								    <m:Text text="Kayıtlar"/>
+								</m:Column>
+								</m:columns>
+								<m:items>
+									<m:ColumnListItem >
+										<m:cells>
+											<m:Text text="{path: 'Invoice>BegDate', formatter: '.formatter.formatDate'}"/>
+                            <m:Text text="{Invoice>persno}"/>
+							<m:Text text="{Invoice>Name}"/>
+                            
+                            
+										</m:cells>
+									</m:ColumnListItem>
+								</m:items>
+							</m:Table>
+						
+						</m:VBox>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+
+		
+	</ObjectPageLayout>
+</mvc:View>

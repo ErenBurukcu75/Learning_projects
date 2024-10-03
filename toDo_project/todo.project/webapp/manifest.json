@@ -1,0 +1,130 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "todo.project",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.14.5",
+      "toolsId": "a8cc4e01-26ac-4d71-a784-fd08c9d0114e"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZIHS_EDUCATION_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.128.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "todo.project.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "todo.project.view",
+        "controlAggregation": "beginColumnPages",
+        "controlId": "flexibleColumnLayout",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "RouteTabloPage",
+          "pattern": ":layout:",
+          "target": [
+            "TargetTabloPage"
+          ]
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{employeePath}",
+          "target": [
+          "TargetTabloPage",  
+          "detail"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetTabloPage": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "controlAggregation": "beginColumnPages",
+          "viewId": "TabloPage",
+          "viewName": "TabloPage"
+         
+        },
+        "detail": {
+          "viewType": "XML",
+          "viewName": "Detail",
+          "controlAggregation": "midColumnPages"
+      
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "todo.project.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}
