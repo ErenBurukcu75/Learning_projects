@@ -21,10 +21,6 @@
 						icon="sap-icon://decline"
 						type="Neutral"
                         press="onListItemPress"/>	
-					<m:Button 
-					 icon="sap-icon://accept"
-					 press="checkLog"
-					/>	
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
@@ -34,11 +30,10 @@
 		  <m:Title text="Detail Employee Page" level="H1" />
 		  </m:HBox>
 			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-				<m:Avatar
-					displaySize="L"
-					displayShape="Square"
-					class="sapUiTinyMarginEnd">
-				</m:Avatar>
+				<m:Image
+					src = "{selectedRow>/img}"
+					class="sapUiTinyMarginEnd myAvatar">
+				</m:Image>
 				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
 							<m:Label text="Sicil No"/>
 							<m:Text text="{selectedRow>/pernr}"/>
@@ -74,7 +69,7 @@
 									<m:Label text="Name"/>
 									<m:Text text="{selectedRow>/calisanAdi}"/>
 									<m:Label text="Müşteri"/>
-									<m:Text text="{selectedRow>/Müşteri}"/>
+									<m:Text text="{selectedRow>/musteri}"/>
 									<m:Label text="Personel Yorumu"/>
 									<m:Text text="{selectedRow>/personelYorumu}"/>
 									<m:Label text="Müşteri Yorumu"/>
@@ -103,7 +98,7 @@
 						
 							<m:Table
 								id="logTable"
-								items="{Invoice>/Invoices}"
+								items="{logModel>/log}"
 								>
 								<m:columns>
 								
@@ -114,15 +109,15 @@
 								    <m:Text text="Saat"/>
 								</m:Column>
 								<m:Column>
-								    <m:Text text="Kayıtlar"/>
+								    <m:Text text="Değişiklik"/>
 								</m:Column>
 								</m:columns>
 								<m:items>
 									<m:ColumnListItem >
 										<m:cells>
-											<m:Text text="{path: 'Invoice>BegDate', formatter: '.formatter.formatDate'}"/>
-                            <m:Text text="{Invoice>persno}"/>
-							<m:Text text="{Invoice>Name}"/>
+											<m:Text text="{path:'logModel>tarih', formatter: '.formatter.formatDate'}"/>
+                            <m:Text text="{logModel>saat}"/>
+							<m:Text text="{logModel>degisiklik}"/>
                             
                             
 										</m:cells>

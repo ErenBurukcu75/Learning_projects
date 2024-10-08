@@ -24,7 +24,7 @@
 					
 					<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>
 					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press=".openPopover"/>
-                    <OverflowToolbarButton text="click me" press=".onRequestButtonPress"/>
+                    <OverflowToolbarButton icon="sap-icon://synchronize" text="getList" press=".onRequestButtonPress"/>
 				</OverflowToolbar>
 				<Table mode="SingleSelectMaster" selectionChange="onRowSelect"
 					id="employeeTable"
@@ -33,20 +33,20 @@
 					class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
 					width="auto">
 					<columns>
-                <Column>
+                <Column width="4em">
                     <header>
                         <Link text="ID" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="ID"/>
+                                <core:CustomData key="columnKey" value="islemId"/>
                             </customData>
                         </Link>
                     </header>
                 </Column>
-                <Column>
+                <Column width="7em">
                     <header>
                         <Link text="Sicil No" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="persno"/>
+                                <core:CustomData key="columnKey" value="pernr"/>
                             </customData>
                         </Link>
                     </header>
@@ -55,14 +55,14 @@
                     <header>
                         <Link text="İsim" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="Name"/>
+                                <core:CustomData key="columnKey" value="calisanAdi"/>
                             </customData>
                         </Link>
                     </header>
                 </Column>
                 <Column>
                     <header>
-                        <Link text="Departman" press=".onColumnHeaderPress" class="customLink">
+                        <Link text="Alan" press=".onColumnHeaderPress" class="customLink">
                             <customData>
                                 <core:CustomData key="columnKey" value="departman"/>
                             </customData>
@@ -73,7 +73,7 @@
                     <header>
                         <Link text="Müşteri" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="Müşteri"/>
+                                <core:CustomData key="columnKey" value="musteri"/>
                             </customData>
                         </Link>
                     </header>
@@ -82,7 +82,7 @@
                     <header>
                         <Link text="Başlama Tarihi" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="BegDate"/>
+                                <core:CustomData key="columnKey" value="baslama"/>
                             </customData>
                         </Link>
                     </header>
@@ -91,7 +91,7 @@
                     <header>
                         <Link text="Bitiş Tarihi" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="EndDate"/>
+                                <core:CustomData key="columnKey" value="asilBitis"/>
                             </customData>
                         </Link>
                     </header>
@@ -105,11 +105,11 @@
                         </Link>
                     </header>
                 </Column>
-                <Column>
+                <Column  width="10em" >
                     <header>
-                        <Link text="Durum" press=".onColumnHeaderPress" class="customLink">
+                        <Link text="Durum Önemi" press=".onColumnHeaderPress" class="customLink">
                             <customData>
-                                <core:CustomData key="columnKey" value="Durum"/>
+                                <core:CustomData key="columnKey" value="durum"/>
                             </customData>
                         </Link>
                     </header>
@@ -118,37 +118,19 @@
                     <header>
                         <Link text="Efor" press=".onColumnHeaderPress" class="customLink" >
                             <customData>
-                                <core:CustomData key="columnKey" value="Efor"/>
+                                <core:CustomData key="columnKey" value="efor"/>
                             </customData>
                         </Link>
                     </header>
                 </Column>
                 <Column >
                     <header>
-                      <Link text="İşlem" press=".onColumnHeaderPress" class="customLink">
+                      <Link text="İşlem Önemi" press=".onColumnHeaderPress" class="customLink">
                           <customData>
-                            <core:CustomData key="columnKey" value="İşlem"/>
+                            <core:CustomData key="columnKey" value="islem"/>
                           </customData>
                       </Link>
                     
-                    </header>
-                </Column>
-                <Column>
-                    <header>
-                        <Link text="Müşteri Yorumu" press=".onColumnHeaderPress" class="customLink">
-                            <customData>
-                                <core:CustomData key="columnKey" value="MusteriYorumu"/>
-                            </customData>
-                        </Link>
-                    </header>
-                </Column>
-                <Column>
-                    <header>
-                        <Link text="Personel Yorumu" press=".onColumnHeaderPress" class="customLink">
-                            <customData>
-                                <core:CustomData key="columnKey" value="PersonelYorumu"/>
-                            </customData>
-                        </Link>
                     </header>
                 </Column>
                 <Column width="4em" >
@@ -168,18 +150,17 @@
                             <Text text="{musteri}"/>
                             <Text text="{path: 'baslama', formatter: '.formatter.formatDate'}"/>
                             <Text text="{path: 'asilBitis', formatter: '.formatter.formatDate'}"/>
-                            <Text text="{is_detay}"/>  
+                            <Text text="{isDetay}" class="customText"/>  
 						<ObjectStatus
 							class="customObjectStatus"
 							text="{path: 'durum', formatter: '.formatter.formatOnemlilik'}"
-							state="{StateCol}" /> 
+							state="{path: 'durum', formatter: '.formatter.formatOnemlilikState'}" /> 
 						    <Text text="{efor}"/>
                             <ObjectStatus
                             class="customObjectStatus"
                             text="{path: 'islem', formatter: '.formatter.formatDurum'}"
-                            state="{StateCol1}"/>
-                            <Text text="{musteriYorumu}"/>
-                            <Text text="{personelYorumu}"/>
+                            state="{path: 'islem', formatter: '.formatter.formatDurumState'}"/>
+                          
                             <Button  icon="sap-icon://edit" press=".onEdit"/>
                             <Button 
                             icon="sap-icon://delete" press=".deleteRow"
@@ -211,7 +192,7 @@
             <Input id="inputPernr"/>
             <Label text="İsim"/>
             <Input id="inputName"/>
-            <Label text="Departman"/>
+            <Label text="Alan"/>
             <Input id="inputDepartman"/>
             <Label text="Müşteri"/>
             <Input id="inputMusteri"/>
@@ -219,8 +200,6 @@
             <DatePicker id="inputBegDate"/>
             <Label text="Bitiş Tarihi"/>
             <DatePicker id="inputEndDate"/>
-            <Label text="İş Detay"/>
-            <Input id="inputIsDetay"/>
             <Label text="İşlem"/>
             <ComboBox id="inputIslem" width="100%">
                 <items>
@@ -239,8 +218,10 @@
                     <core:Item key="3" text="Çok Kritik"/>
                 </items>
             </ComboBox>
-            <Label text="Efor"/>
+            <Label text="Efor(Adam/Gün)"/>
             <Input id="inputEfor"/>
+            <Label text="İş Detay" />
+            <TextArea id="inputIsDetay" width="100%" rows="4" />
              <Label text="Müşteri Yorumu"/>
             <TextArea id="inputMusteriYorumu" width="100%" rows="4"/>
             <Label text="Personel Yorumu"/>
@@ -275,7 +256,7 @@
                     <Input id="dialogPernr"/>
                     <Label text="Name"/>
                     <Input id="dialogName"   />
-                    <Label text="Departman"/>
+                    <Label text="Alan"/>
                     <Input id="dialogDepartman"/>
                     <Label text="Müşteri"/>
                     <Input id="dialogMusteri"/>
@@ -288,7 +269,7 @@
              displayFormat="dd.MM.yyyy" 
                     valueFormat="yyyy-MM-dd"/>
             <Label text="İşlem"/>
-            <ComboBox id="dialogIslem" width="100%">
+            <ComboBox id="dialogIslem" width="100%" >
                 <items>
                     <core:Item key="0" text="Başlanmadı"/>
                     <core:Item key="1" text="Beklemede"/>
@@ -297,7 +278,7 @@
                 </items>
             </ComboBox>
             <Label text="Durum"/>
-            <ComboBox id="dialogDurum" width="100%">
+            <ComboBox id="dialogDurum" width="100%" >
                 <items>
                     <core:Item key="0" text="Az Önemli"/>
                     <core:Item key="1" text="Orta"/>
@@ -305,8 +286,10 @@
                     <core:Item key="3" text="Çok Kritik"/>
                 </items>
             </ComboBox>
-             <Label text="Efor"/>
+             <Label text="Efor(Adam/Gün)"/>
             <Input id="dialogEfor"/>
+            <Label text="İş Detay" />
+            <TextArea id="dialogIsDetay" width="100%" rows="4" />
             <Label text="Müşteri Yorumu"/>
              <TextArea id="dialogMusteriYorumu" width="100%" rows="4"/>
         <Label text="Personel Yorumu"/>

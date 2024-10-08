@@ -38,3 +38,32 @@
     background-color: red !important;
 }
 
+.myAvatar {
+  border-radius: 10% !important;
+  width: 90px !important;
+  height: 90px !important;
+}
+
+.key0 {
+    color: red; /* Başlanmadı */
+}
+
+.key1 {
+    color: yellow; /* Beklemede */
+}
+
+.key2 {
+    color: blue; /* Devam ediyor */
+}
+
+.key3 {
+    color: green; /* Tamamlandı */
+}
+
+.customText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+}
+

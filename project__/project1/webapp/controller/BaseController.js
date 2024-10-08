@@ -14,6 +14,14 @@ sap.ui.define([
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("RouteHome", {}, true);
             }
-        }
+        },
+
+        getImageUrlOfPersonnel: function (pernr) {
+            return "/sap/opu/odata/sap/HCMFAB_COMMON_SRV/" +
+                "EmployeePictureSet(ApplicationId='DOCMANAGE',EmployeeId='" +
+                pernr +
+                "')/$value";
+        },
+
     });
 });

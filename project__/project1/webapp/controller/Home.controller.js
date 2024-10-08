@@ -14,10 +14,11 @@ sap.ui.define([
      return BaseController.extend("project1.controller.Home", {
         formatter: formatter,
  
-         onInit: function() {
+         onInit:  function() {
              this.getOwnerComponent().getRouter().initialize();
              //Kontrol amaçlı
              console.log("Component initialized.");
+            
 
              
             
@@ -75,6 +76,7 @@ sap.ui.define([
             var sBegDate = oContext.getProperty("baslama");
             var sEndDate = oContext.getProperty("asilBitis");
             var sIslem = oContext.getProperty("islem");
+            var sIsDetay = oContext.getProperty("isDetay");
             var sMusteriYorumu = oContext.getProperty("musteriYorumu");
             var sPersonelYorumu = oContext.getProperty("personelYorumu");
             var sDurum = oContext.getProperty("durum");
@@ -87,10 +89,11 @@ sap.ui.define([
             this.byId("dialogMusteri").setValue(sMusteri);
             this.byId("dialogBegDate").setValue(sBegDate);
             this.byId("dialogEndDate").setValue(sEndDate);
-            this.byId("dialogIslem").setValue(sIslem);
+            this.byId("dialogIslem").setSelectedKey(sIslem);
+            this.byId("dialogIsDetay").setValue(sIsDetay);
             this.byId("dialogMusteriYorumu").setValue(sMusteriYorumu);
             this.byId("dialogPersonelYorumu").setValue(sPersonelYorumu);
-            this.byId("dialogDurum").setValue(sDurum);
+            this.byId("dialogDurum").setSelectedKey(sDurum);
             this.byId("dialogEfor").setValue(sEfor);
             
 
@@ -108,8 +111,11 @@ sap.ui.define([
             var sDepartman = this.byId("dialogDepartman").getValue();
             var sMusteri = this.byId("dialogMusteri").getValue();
             var sBegDate = this.byId("dialogBegDate").getDateValue();
+            sBegDate.setHours(12,12,0)
             var sEndDate = this.byId("dialogEndDate").getDateValue();
+            sEndDate.setHours(12,12,0)
             var sIslem = this.byId("dialogIslem").getSelectedKey();
+            var sIsDetay = this.byId("dialogIsDetay").getValue();
             var sDurum = this.byId("dialogDurum").getSelectedKey();
             var sEfor = this.byId("dialogEfor").getValue();
             var sMusteriYorumu = this.byId("dialogMusteriYorumu").getValue();
@@ -127,7 +133,7 @@ sap.ui.define([
                
                 baslama : sBegDate,
                 asil_bitis : sEndDate,
-                // is_detay : sIslem,
+                isDetay : sIsDetay,
                 islem : sIslem,
                 durum : sDurum,
                 efor : sEfor,
@@ -234,18 +240,42 @@ sap.ui.define([
             oBinding.sort(oSorter);
         },
 
-        onRowSelect: function (oEvent) {
+        onRowSelect: async function (oEvent) {
             var oTable = this.byId("employeeTable");
             var item = oEvent.getParameter("listItem");
             var context = item.getBindingContext();
             var row = context.getObject();
-        
-         
+            var sicilNo = row.islemId;
+
+            var Processname = "GetLog"; 
+            var Jsondata = { sicilNo : sicilNo };
+            var that = this;
+            var logModel;
+
+            var res = this.getImageUrlOfPersonnel(sicilNo);
+            console.log(res)
+            row.img = res;
+            console.log("ROW",row)
+
+
+            await this.request(Processname, Jsondata)
+                .then(function(result) {
+                logModel = new JSONModel();
+                logModel.setData({ log: result});
+                that.getView().setModel(logModel, "logModel");
+                console.log("Request başarılı: " + JSON.stringify(result));
+                })
+                .catch(function(error) {
+                MessageToast.show("Request başarısız: " + JSON.stringify(error));
+                });
+
+          
 
             var oView = this.getView();
             var oFCL = oView.getParent().getParent();
 
             var oModel = new JSONModel(row);
+            
             this.getView().setModel(oModel, "selectedRow");
 
             
@@ -253,6 +283,7 @@ sap.ui.define([
             var oDetailView = sap.ui.getCore().byId(oDetailViewId);
             if (oDetailView) { // eğer mevcut ise modeli güncelle
                oDetailView.setModel(oModel, "selectedRow");
+               oDetailView.setModel(logModel, "logModel");
             } else {
              // Yosak eğer detail view'ı yükleyin ve model'i geçir
             oDetailView = sap.ui.view({
@@ -261,12 +292,15 @@ sap.ui.define([
                 type: sap.ui.core.mvc.ViewType.XML
             });
             oDetailView.setModel(oModel, "selectedRow");
+            oDetailView.setModel(logModel, "logModel");
             oFCL.addMidColumnPage(oDetailView);
             }
 
 
             oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsBeginExpanded);
             oFCL.to(oDetailView.getId(), "MidColumn");
+
+            oTable.removeSelections(true);
             
         },
         onRequestButtonPress: async function () {
@@ -306,26 +340,18 @@ sap.ui.define([
             var oView = this.getView();
             var oModel = oView.getModel("/Veriler");
 
-            // var sIslemKey = oView.byId("inputIslem").getSelectedKey();
-            // var iIslemValue;
+            var oBegDate = oView.byId("inputBegDate").getDateValue();
+            var oEndDate = oView.byId("inputEndDate").getDateValue();
 
-            // switch (sIslemKey) {
-            //     case "low1":
-            //         iIslemValue = 0;
-            //         break;
-            //     case "medium1":
-            //         iIslemValue = 1;
-            //         break;
-            //     case "high1":
-            //         iIslemValue = 2;
-            //         break;  
-            //     case "veryHigh1":
-            //         iIslemValue = 3;
-            //         break;
-            //     default:
-            //         iIslemValue = -1;               
-            // }
-            
+            if (!oBegDate || !oEndDate) {
+                MessageToast.show("Lütfen başlangıç ve bitiş tarihlerini seçin.");
+                return;
+            }
+
+            if (oEndDate < oBegDate) {
+                MessageToast.show("Bitiş tarihi, başlangıç tarihinden önce olamaz.");
+                return;
+            }
 
             var oNewEntry = {
                 ID: oView.byId("inputID").getValue(),
@@ -408,7 +434,10 @@ sap.ui.define([
                 MessageToast.show("silinemedi");
                 console.error("silinmedi", error);
             }
-        }
+        },
+
+       
+
      });
  });
  

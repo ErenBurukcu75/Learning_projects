@@ -1,8 +1,0 @@
-{
-    "employees": [
-        { "pernr": "1", "ename": "John Doe", "plntx": "IT", "begda": "2023-01-01", "endda": "2023-12-31", "mstryr": "TEST312", "pernryr": "YGT312" },
-        { "pernr": "2", "ename": "Jane Smith", "plntx": "HR", "begda": "2023-02-01", "endda": "2023-11-30", "mstryr": "YGT312", "pernryr": "YGT313" },
-        { "pernr": "3", "ename": "Alice Johnson", "plntx": "Finance", "begda": "2023-03-01", "endda": "2023-10-31", "mstryr": "TEST313", "pernryr": "YGT314" },
-        { "pernr": "4", "ename": "Bob Brown", "plntx": "Marketing", "begda": "2023-04-01", "endda": "2023-09-30", "mstryr": "TEST314", "pernryr": "YGT315" }
-    ]
-}

@@ -43,6 +43,21 @@ sap.ui.define([], function () {
             }
         },
 
+        formatOnemlilikState: function (value) {
+            switch (value) {
+                case "0":
+                    return "Success"; // Yeşil
+                case "1":
+                    return "Information"; // Mavi
+                case "2":
+                    return "Warning"; // Sarı
+                case "3":
+                    return "Error"; // Kırmızı
+                default:
+                    return "None"; // Varsayılan
+            }
+        },
+
         formatDurum: function(value) {
             switch (value) {
                 case "0":
@@ -57,6 +72,49 @@ sap.ui.define([], function () {
                     return "Bilinmiyor";             
             }
 
+        },
+        formatDurumState: function (value) {
+            switch (value) {
+                case "0":
+                    return "Error"; // Kırmızı
+                case "1":
+                    return "Warning"; // Sarı
+                case "2":
+                    return "Information"; // Mavi
+                case "3":
+                    return "Success"; // Yeşil
+                default:
+                    return "None"; // Varsayılan
+            }
+        },
+
+        formatIslemColor: function (key) {
+            switch (key) {
+                case "0":
+                    return "Error"; // Kırmızı
+                case "1":
+                    return "Warning"; // Sarı
+                case "2":
+                    return "Information"; // Mavi
+                case "3":
+                    return "Success"; // Yeşil
+                default:
+                    return "None"; // Varsayılan
+            }
+        },
+        formatDurumColor: function (key) {
+            switch (key) {
+                case "0":
+                    return "Success"; // Yeşil
+                case "1":
+                    return "Information"; // Mavi
+                case "2":
+                    return "Warning"; // Sarı
+                case "3":
+                    return "Error"; // Kırmızı
+                default:
+                    return "None"; // Varsayılan
+            }
         }
     };
 });

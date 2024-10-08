@@ -14,7 +14,7 @@ sap.ui.define([
 		formatter: formatter,
 		
 		onInit: function () {
-            this.getOwnerComponent().getRouter().initialize();
+    
 			
 		},
 
@@ -59,27 +59,35 @@ sap.ui.define([
             oFCL.setLayout(fioriLibrary.LayoutType.BeginColumn);
 		},
 
+        formatDateToYYYYMMDD: function(date) {
+            var parts = date.split(".");
+            if (parts.length === 3) {
+                return parts[2] + "-" + parts[1] + "-" + parts[0];
+            } else if (parts.length === 2) {
+                return parts[1] + "-" + parts[0];
+            }
+            return date;
+        },
+
 		onSearch: function (oEvent) {
             
             var sValue = oEvent.getParameter("query");
             var oTable = this.byId("logTable");
             var oBinding = oTable.getBinding("items");
+            
+            console.log(sValue)
+
+            var formattedDate = this.formatDateToYYYYMMDD(sValue);
+        
+        
 
     
     var aFilters = [
-        new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("persno", sap.ui.model.FilterOperator.Contains, sValue),
+        new sap.ui.model.Filter("tarih", sap.ui.model.FilterOperator.Contains, formattedDate),
+        new sap.ui.model.Filter("saat", sap.ui.model.FilterOperator.Contains, sValue),
+        new sap.ui.model.Filter("degisiklik", sap.ui.model.FilterOperator.Contains, sValue),
 
-        new sap.ui.model.Filter("Name", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("Müşteri", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("begDate", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("EndDate", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("MusteriYorumu", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("PersonelYorumu", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("isDetay", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("Durum", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("Efor", sap.ui.model.FilterOperator.Contains, sValue),
-        new sap.ui.model.Filter("İşlem", sap.ui.model.FilterOperator.Contains, sValue),
+        
     ];
 
     
