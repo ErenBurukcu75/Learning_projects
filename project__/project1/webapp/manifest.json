@@ -94,23 +94,14 @@
         {
           "name": "RouteHome",
           "pattern": "",
-          "target": "TargetHome"
+          "target": ["TargetHome"]
         },
         {
           "name": "RouteDetail",
           "pattern": "Detail",
-          "target": "TargetDetail"
-        },
-        {
-          "name": "RouteInvoice",
-          "pattern": "Invoice",
-          "target": "TargetInvoice"
-        },
-        {
-          "name": "RouteAbout",
-          "pattern": "About",
-          "target": "TargetAbout"
+          "target": ["TargetDetail"]
         }
+       
       ],
       "targets": {
         "TargetHome": {
@@ -123,19 +114,9 @@
           "viewPath": "project1.view.Detail",
           "viewName": "Detail",
           "viewLevel": 2
-        },
-        "TargetInvoice": {
-          "viewId": "Invoice",
-          "viewPath": "project1.view.Invoice",
-          "viewName": "Invoice",
-          "viewLevel": 2
-        },
-        "TargetAbout": {
-          "viewId": "About",
-          "viewPath": "project1.view.About",
-          "viewName": "About",
-          "viewLevel": 2
         }
+        
+        
       }
     },
     "rootView": {

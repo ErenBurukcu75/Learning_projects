@@ -23,5 +23,18 @@ sap.ui.define([
                 "')/$value";
         },
 
+        scrollTo : function (id) {
+            document.getElementById(this.byId(id).sId).scrollIntoView( {behavior: "smooth" } );
+        },
+
+        getRouter: function () {
+            return sap.ui.core.UIComponent.getRouterFor(this);
+        },
+
+        attachRouteMatch: function (name, callback) {
+            console.log(this.getRouter())
+            this.getRouter().getRoute(name).attachMatched(callback, this);
+        }
+
     });
 });

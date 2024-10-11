@@ -4,8 +4,10 @@ sap.ui.define([
 	"project1/formatter",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast",
-    "project1/controller/BaseController"
-], function (Controller, fioriLibrary, formatter, JSONModel, MessageToast, BaseController ) {
+    "project1/controller/BaseController",
+    "sap/ui/core/routing/Router"
+
+], function (Controller, fioriLibrary, formatter, JSONModel, MessageToast, BaseController, Router ) {
 	formatter = formatter;
 	
 	"use strict";
@@ -14,9 +16,22 @@ sap.ui.define([
 		formatter: formatter,
 		
 		onInit: function () {
+
+           
+            
+           
+
+            // this.attachRouteMatch("RouteDetail",this._onObjectMatched);
     
 			
 		},
+
+        _onObjectMatched: function () {
+
+          var oView = this.getView();
+          var pId =  oView.byId("eScroll");
+          oView.byId(ObjectPageLayout).setSelectedSection(pId);
+        },
 
         request: async function (processName, postData) {
             if (!this.service) {
@@ -56,7 +71,12 @@ sap.ui.define([
             var oView = this.getView();
             var oFCL = oView.getParent().getParent();
 
-            oFCL.setLayout(fioriLibrary.LayoutType.BeginColumn);
+            oFCL.setLayout(fioriLibrary.LayoutType.OneColumn);
+             
+            
+    setTimeout(function() {
+        document.documentElement.scrollTop = 0;
+    }, 0)
 		},
 
         formatDateToYYYYMMDD: function(date) {

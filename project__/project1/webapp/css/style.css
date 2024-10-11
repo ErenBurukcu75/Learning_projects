@@ -67,3 +67,25 @@
     max-width: 100px;
 }
 
+#employeeTable {
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+.sapMListTblRowSingleSelectLeft .sapMText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#inputMusteri {
+    width: 95% !important; /* Combobox'un genişliğini sabitlemek için */
+}
+
+#logTable{
+    width: 100%;
+    table-layout: fixed;
+}
+
+

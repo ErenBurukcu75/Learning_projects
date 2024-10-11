@@ -133,6 +133,7 @@
     "node-releases": "^2.0.18",
     "normalize-path": "^3.0.0",
     "npm-run-path": "^4.0.1",
+    "nwabap-ui5uploader": "^1.2.0",
     "once": "^1.4.0",
     "onetime": "^5.1.2",
     "p-limit": "^3.1.0",

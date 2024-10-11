@@ -24,16 +24,20 @@
 					
 					<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>
 					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press=".openPopover"/>
-                    <OverflowToolbarButton icon="sap-icon://synchronize" text="getList" press=".onRequestButtonPress"/>
+                    
 				</OverflowToolbar>
 				<Table mode="SingleSelectMaster" selectionChange="onRowSelect"
 					id="employeeTable"
 					inset="false"
 					items="{/veriler}"
 					class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
-					width="auto">
+					width="auto"
+                    growing="true"
+    growingScrollToLoad="true"
+    fixedLayout="false"
+                   >
 					<columns>
-                <Column width="4em">
+                <Column >
                     <header>
                         <Link text="ID" press=".onColumnHeaderPress" class="customLink">
                             <customData>
@@ -42,7 +46,7 @@
                         </Link>
                     </header>
                 </Column>
-                <Column width="7em">
+                <Column >
                     <header>
                         <Link text="Sicil No" press=".onColumnHeaderPress" class="customLink">
                             <customData>
@@ -56,15 +60,6 @@
                         <Link text="İsim" press=".onColumnHeaderPress" class="customLink">
                             <customData>
                                 <core:CustomData key="columnKey" value="calisanAdi"/>
-                            </customData>
-                        </Link>
-                    </header>
-                </Column>
-                <Column>
-                    <header>
-                        <Link text="Alan" press=".onColumnHeaderPress" class="customLink">
-                            <customData>
-                                <core:CustomData key="columnKey" value="departman"/>
                             </customData>
                         </Link>
                     </header>
@@ -105,7 +100,7 @@
                         </Link>
                     </header>
                 </Column>
-                <Column  width="10em" >
+                <Column  >
                     <header>
                         <Link text="Durum Önemi" press=".onColumnHeaderPress" class="customLink">
                             <customData>
@@ -114,7 +109,7 @@
                         </Link>
                     </header>
                 </Column>
-                <Column width="5em">
+                <Column >
                     <header>
                         <Link text="Efor" press=".onColumnHeaderPress" class="customLink" >
                             <customData>
@@ -133,10 +128,10 @@
                     
                     </header>
                 </Column>
-                <Column width="4em" >
+                <Column >
                    
                 </Column>
-                 <Column width="4em">
+                 <Column >
                    
                 </Column>
             </columns>
@@ -146,7 +141,7 @@
 							<Text text="{islemId}"/>
                             <Text text="{pernr}"/>
 							<Text text="{calisanAdi}"/>
-                            <Text text="{departman}"/>
+                           
                             <Text text="{musteri}"/>
                             <Text text="{path: 'baslama', formatter: '.formatter.formatDate'}"/>
                             <Text text="{path: 'asilBitis', formatter: '.formatter.formatDate'}"/>
@@ -191,11 +186,19 @@
             <Label text="Sicil no "/>
             <Input id="inputPernr"/>
             <Label text="İsim"/>
-            <Input id="inputName"/>
-            <Label text="Alan"/>
-            <Input id="inputDepartman"/>
-            <Label text="Müşteri"/>
-            <Input id="inputMusteri"/>
+            <Input id="inputName" editable="false"/>
+            
+         <Label text="Müşteri"/>
+        <HBox width="100%" >
+                <ComboBox class = "sapUiTinyMarginEnd" width="15rem" id="inputMusteri" change="onComboBoxChange" placeholder="Müşteri Seçiniz...">
+                   
+                        <core:ListItem key="{clientModel>musteriId}" text="{clientModel>musteriAd}" />
+                   
+                </ComboBox>
+        
+                <Button icon="sap-icon://add" press="onAddButtonPress"/>
+            
+        </HBox>
             <Label text="Başlama Tarihi"/>
             <DatePicker id="inputBegDate"/>
             <Label text="Bitiş Tarihi"/>
@@ -251,15 +254,19 @@
         <Dialog id="myDialog1" title="My Popup">
             <VBox class= "sapUiSmallMargin">
                     <Label text="ID"/>
-                    <Input id="dialogId"  />
+                    <Input id="dialogId" editable="false" />
                     <Label text="Sicil no"/>
                     <Input id="dialogPernr"/>
                     <Label text="Name"/>
-                    <Input id="dialogName"   />
-                    <Label text="Alan"/>
-                    <Input id="dialogDepartman"/>
+                    <Input id="dialogName"   editable="false"/>
                     <Label text="Müşteri"/>
-                    <Input id="dialogMusteri"/>
+                <HBox width="100%" justifyContent="SpaceBetween">
+                    
+                    <ComboBox id="dialogMusteri" width="100%"  change="onComboBoxChange"  placeholder="Müşteri Seçiniz...">
+                        <core:ListItem key="{clientModel>musteriId}" text="{clientModel>musteriAd}" />
+                    </ComboBox>
+                    <Button icon="sap-icon://add" press="onAddButtonPress"/>
+                    </HBox>
                     <Label text="Başlama Tarihi"/>
             <DatePicker id="dialogBegDate"
              displayFormat="dd.MM.yyyy" 
@@ -303,6 +310,18 @@
             </beginButton>
         </Dialog>
 
-       
+       <Dialog id="addClientDialog" title="Müşteri Ekleme Sekmesi">
+       <VBox class= "sapUiSmallMargin">
+       <Label text="Müşteri ismi giriniz"/>
+       <Input id="musteriID"/>
+       </VBox>
+       <endButton>
+            <Button text="Cancel" press="onCloseClient"/>
+       </endButton>
+          <beginButton>
+            <Button text="Ok" press="onAddClient" />
+          </beginButton>
+          
+       </Dialog>
 </Popover>
 </mvc:View>

@@ -12,7 +12,8 @@
 		preserveHeaderStateOnScroll="false"
 		headerContentPinnable="false"
 		isChildPage="true"
-		upperCaseAnchorBar="false">
+		upperCaseAnchorBar="false"
+		selectedSection="sScroll">
 		<headerTitle>
 			<ObjectPageDynamicHeaderTitle>
 				<actions>
@@ -25,8 +26,8 @@
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
 
-		<headerContent>
-		  <m:HBox justifyContent="Center">
+		<headerContent >
+		  <m:HBox justifyContent="Center" id="eScroll"> 
 		  <m:Title text="Detail Employee Page" level="H1" />
 		  </m:HBox>
 			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
@@ -49,7 +50,7 @@
 		</headerContent>
 
 		<sections>
-			<ObjectPageSection title="General Information">
+			<ObjectPageSection title="General Information" id="sScroll">
 				<subSections>
 					<ObjectPageSubSection>
 						<blocks>
@@ -99,13 +100,14 @@
 							<m:Table
 								id="logTable"
 								items="{logModel>/log}"
+								class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
 								>
 								<m:columns>
 								
-								<m:Column >
+								<m:Column width="10em">
 								    <m:Text text="Tarih"/>
 								</m:Column>
-								<m:Column >
+								<m:Column width="10em">
 								    <m:Text text="Saat"/>
 								</m:Column>
 								<m:Column>
