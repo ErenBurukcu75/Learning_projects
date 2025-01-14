@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <GenericTile header="{/title}" subheader="{/title}" size="Auto">
+        <tileContent>
+            <TileContent>
+                <content>
+                <HBox justifyContent="SpaceBetween">
+                    <Button text="{/description}" />
+                    <Button icon="sap-icon://edit" press=".editTile"/>
+                    </HBox>
+                </content>
+            </TileContent>
+        </tileContent>
+    </GenericTile>
+</core:FragmentDefinition>

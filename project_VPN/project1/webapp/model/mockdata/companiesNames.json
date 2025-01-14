@@ -1,0 +1,18 @@
+{
+    "companies": [
+        {
+            "id": "aselsan",
+            "tiles": [
+                { "title": "VPN Bilgisi 1", "description": "Aselsan VPN detayı 1" },
+                { "title": "VPN Bilgisi 2", "description": "Aselsan VPN detayı 2" }
+            ]
+        },
+        {
+            "id": "othercompany",
+            "tiles": [
+                { "title": "VPN Bilgisi 1", "description": "Diğer Şirket VPN detayı 1" },
+                { "title": "VPN Bilgisi 2", "description": "Diğer Şirket VPN detayı 2" }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <!-- Yeni Popover tanımı -->
+    <Popover
+        id="detailsPopover"
+        placement="Right"
+        showHeader="false"
+    >
+        <VBox>
+            <Button
+                text="VPN Settings"
+                press="onVPNPress"
+                class="sapUiSmallMarginBegin sapUiSmallMarginTop"
+                tooltip="VPN Sayfasına gitmek İçin Tıklayınız"
+            />
+            <Button
+                text="Logon/Login"
+                press="onSystemInfoPress"
+                class="sapUiSmallMargin"
+                tooltip="Logon/Login Sayfasına gitmek için tıklayınız"
+            />
+        </VBox>
+    </Popover>
+</core:FragmentDefinition>

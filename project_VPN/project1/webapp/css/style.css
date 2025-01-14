@@ -1,0 +1,185 @@
+/* Enter your custom styles here */.inputWithMargin {
+    margin-right: 10px; /* Burayı ihtiyacınıza göre ayarlayın */
+}
+
+.buttonWithMargin {
+    margin-left: 10px; /* Burayı ihtiyacınıza göre ayarlayın */
+}
+.customPanel {
+    border: 1px solid black; /* Kenarlık rengi ve kalınlığı */
+    border-radius: 4px; /* Kenar yuvarlama (isteğe bağlı) */
+    /* padding: 1rem; */
+}
+.customIcon{
+    margin-right: 10px;
+}
+
+.customHBox {
+    padding: 10px; /* Kenar boşluğu ekleyin */
+    background-color: #f0f0f0; /* Arka plan rengi */
+    border-radius: 5px; /* Kenar yuvarlama */
+}
+
+.customText {
+    font-weight: bold; /* Metin kalınlığı */
+    margin-right: 10px; /* Buton ile metin arasındaki boşluk */
+}
+
+.customButton {
+    color: white; /* Buton metin rengi */
+    border: none; /* Kenarlık kaldır */
+    border-radius: 3px; /* Kenar yuvarlama */
+    padding: 5px 10px; /* Buton iç boşluk */
+    cursor: pointer; /* İmleç değişimi */
+}
+
+.myCustomListItem {
+    max-height: 220px;
+    max-width: 220px;
+   
+    
+   
+}
+
+.testtt{
+    margin-left: 215px !important;
+}
+.resimClass{
+    margin-left: 315px !important;
+    margin-top: 190px !important;
+}
+
+
+
+.currentTimeText {
+    font-size: 2.5em; /* Larger font size */
+    font-weight: bold; /* Make it bold */
+    margin-left: 8px; /* Space between icon and text */
+    color: rgb(48, 48, 48); /* Custom color */
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.centeredBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.customLink {
+    color: black !important; 
+    text-decoration: none !important; 
+    user-select: none !important;
+    background-color: transparent !important; 
+    width: 2em;
+    font-size: 1.1em;
+    margin-bottom: 10px !important;
+}
+
+.fontSize{
+    font-size: 2em !important;
+}
+
+.denemeee{
+    border: 1px solid black;
+    border-radius: 4px !important;
+    border-width: 1px !important;
+}
+
+.stickyClass .sapMPanelContent {
+    padding-top: 0 !important;
+
+}
+
+.stickySearchField {
+    position: sticky;
+    top: 0 !important; /* Ensure this is set to 0 */
+    background-color: white; /* Background color */
+    z-index: 1000; /* Ensure it stays on top */
+    
+    margin: 0 !important; /* Remove any margin */
+    box-sizing: border-box !important; /* Include padding in width/height calculations */
+}
+
+
+.customPaddingPanel .sapMPanelContent{
+    padding-top: 0 !important;
+}
+
+.homeDeneme .sapMPageEnableScrolling{
+    padding-top: 15px !important;
+}
+
+.panelDeneme .sapMPanelExpandablePart{
+    height: 671px !important;
+}
+
+.barDeneme .sapMIBar {
+    padding-left: 10px !important;
+}
+.DENEMEEE .sapMLIB{
+    border: 1px solid black !important;
+}
+.panelBorder .sapMPanelContent{
+    border: 0px !important
+}
+
+.sapUiIcon::before{
+    color: cornflowerblue !important;
+}
+
+.redText{
+    color: red !important;
+}
+
+.whiteText{
+    color: white !important;
+}
+
+
+.denemePanel .sapMPanelHdr{
+    background: #4c7b99 !important;
+    color: white !important;
+}
+.denemePanel .sapMPanelWrappingDivExpanded{
+    background: #4c7b99 !important;
+    color: white !important;
+}
+.denemePanel .sapMPanelWrappingDiv{
+    background: #4c7b99 !important;
+    color: white !important;
+}
+
+.barDeneme .sapMBar {
+    background: linear-gradient(to right, #9157cb, #815fd0, #6b6bd2, #6b6bd2, #2793d3, #29aabd, #2abbac, #2cc99e) !important;
+}
+
+
+.barDeneme .sapMSubHeader-CTX {
+    background: linear-gradient(to right, #9157cb, #815fd0, #6b6bd2, #6b6bd2, #2793d3, #29aabd, #2abbac, #2cc99e) !important;
+}
+
+.barDeneme .sapMPanelHeaderTB {
+    background: linear-gradient(to right, #9157cb, #815fd0, #6b6bd2, #6b6bd2, #2793d3, #29aabd, #2abbac, #2cc99e) !important;
+}
+
+.asdasd{
+    border: 1px solid white;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius:70px ;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    color: white !important;
+    margin-bottom: 15px !important;
+  
+}
+
+.barDeneme .sapMTitle{
+    text-shadow: none !important;
+    color: white !important;
+}

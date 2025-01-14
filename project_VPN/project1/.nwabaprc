@@ -1,0 +1,13 @@
+{
+    "base": "./dist",
+    "conn_server": "https://fioridev.vesa-tech.com/",
+    "conn_client" : "100",
+    "conn_user": "fioriuser",
+    "conn_password": "Vesa365.!",
+    "abap_package": "ZHRVS",
+    "abap_bsp": "ZHRVS_EB_ONPRE",
+    "abap_transport": "VSDK901200",
+    "abap_bsp_text": "VESA Onprem App",
+    "conn_usestrictssl" : false,
+    "calcappindex" : true
+}

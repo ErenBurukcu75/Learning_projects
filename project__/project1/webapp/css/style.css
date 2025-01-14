@@ -79,13 +79,29 @@
     text-overflow: ellipsis;
 }
 
-#inputMusteri {
-    width: 95% !important; /* Combobox'un genişliğini sabitlemek için */
-}
+
 
 #logTable{
     width: 100%;
     table-layout: fixed;
 }
+
+.centerContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    z-index: 1000; /* Yüksek z-index değeri, diğer içeriklerin üstünde durmasını sağlar */
+}
+
+
+
+
+
 
 

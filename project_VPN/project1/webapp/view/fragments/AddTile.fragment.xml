@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog id="addTileDialog" title="VPN Ekleme Ekranı">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <Label text="Başlık"/>
+                <Input id="inputTileTitle" placeholder="Kart başlığını girin..."/>
+                <Label text="Alt Başlık"/>
+                <Input id="inputTileSubTitle" placeholder="Kart alt başlığını giriniz..."/>
+                <Label text="Açıklama"/>
+                <TextArea id="inputTileDescription" placeholder="Kart açıklamasını girin..." rows="3" width="18em"/>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Kaydet" press="onSaveTilePress"/>
+        </beginButton>
+        <endButton>
+            <Button text="İptal" press="onCloseTilePress"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

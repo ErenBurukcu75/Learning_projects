@@ -4,12 +4,14 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/ui/model/json/JSONModel",
     "project1/formatter",
-    "sap/f/library"
+    "sap/f/library",
+  
 
  ],
- function (BaseController, MessageToast, JSONModel, formatter, fioriLibrary) {
+ function (BaseController, MessageToast, JSONModel, formatter, fioriLibrary,) {
     formatter = formatter;
      "use strict";
+     var sortCounter = 0; // sort için gerekli  counter
  
      return BaseController.extend("project1.controller.Home", {
         formatter: formatter,
@@ -18,19 +20,28 @@ sap.ui.define([
              this.getOwnerComponent().getRouter().initialize();
              //Kontrol amaçlı
              console.log("Component initialized.");
+             
+           
+      
 
          },
 
+    
+
          onAfterRendering: async function () {
             var that = this;
+            var oBusyIndicator = this.byId("busyIndicatorContainer")
+
+            if(oBusyIndicator){
+                oBusyIndicator.setVisible(true);
+            }
         
             console.log("onAfterRendering başladı");
-        
             // GetList request'i
             var ProcessnameList = "GetList"; 
             var JsondataList = {};
             
-            await new Promise(resolve => setTimeout(resolve, 1000)); // 1 saniyelik delay
+            await new Promise(resolve => setTimeout(resolve, 250)); // 1 saniyelik delay
             await that.request(ProcessnameList, JsondataList)
                 .then(function(result) {
                     console.log("Request başarılı: ", result);
@@ -38,20 +49,36 @@ sap.ui.define([
                     var oModel = new JSONModel();
                     oModel.setData({ veriler: result });
                     that.getView().setModel(oModel);
+
+                    var favMembers = result.filter(function(member) {
+                        return member.fav === "1";
+                    });
+                    console.log("Filtrelenmiş favoriler: ", favMembers);
+
+                    var oFavModel = new JSONModel();
+                    oFavModel.setData({ favourites: favMembers });
+                    that.getView().setModel(oFavModel, "favourites");
+                    that.updateFavouriteIcons();
         
-                    // Model'in gerçekten ayarlandığını kontrol et
+
+                // Favoriler modelinin ayarlandığını hemen kontrol et
+                var oFavouritesModel = that.getView().getModel("favourites");
+                console.log("Favoriler modeli ayarlandı: ", oFavouritesModel.getData());
                     console.log("Model ayarlandı: ", that.getView().getModel().getData());
+
+                    that.applyInitialFilters();
+                   
                 })
                 .catch(function(error) {
                     console.error("Request başarısız: ", error);
                     MessageToast.show("Request başarısız: " + JSON.stringify(error));
                 });
-        
+                
             // GetClientList request'i
             var ProcessnameClient = "GetClientList"; 
             var JsondataClient = {};
             
-            await new Promise(resolve => setTimeout(resolve, 1000)); // 1 saniyelik delay
+            await new Promise(resolve => setTimeout(resolve, 250)); // 1 saniyelik delay
             await that.request(ProcessnameClient, JsondataClient)
                 .then(function(result) {
                     console.log("Request başarılı: " + JSON.stringify(result));
@@ -75,8 +102,183 @@ sap.ui.define([
                 .catch(function(error) {
                     MessageToast.show("Request başarısız: " + JSON.stringify(error));
                 });
+
+                console.log("--------------------------------")
+                var ProcessnameClient = "GetName";
+                var JsondataClient = {
         
+                }
+
+
+                await new Promise(resolve => setTimeout(resolve, 250)); // 1 saniyelik delay
+                await that.request(ProcessnameClient, JsondataClient)
+                .then(function(result) {
+                    console.log("Request başarılı: " + JSON.stringify(result));
+            
+                    var oClientModel = new JSONModel();
+                    oClientModel.setData({ clients: result });
+                    that.getView().setModel(oClientModel, "musteriModel");
+            
+                   
+                    ["inputPernr", "dialogPernr"].forEach(function(comboBoxId) {
+                        var oComboBox = that.byId(comboBoxId);
+                        oComboBox.bindItems({
+                            path: "musteriModel>/clients", 
+                            template: new sap.ui.core.ListItem({
+                                key: "{musteriModel>pernr}",
+                                text: "({musteriModel>pernr}) {musteriModel>ename} " 
+                            })
+                        });
+                    });
+                })
+                .catch(function(error) {
+                    MessageToast.show("Request başarısız: " + JSON.stringify(error));
+                });
+
+              
+
+                var oDialog = this.byId("addDialog");
+
+                if (oDialog) {
+                    oDialog.addStyleClass("sapUiInvisibleText");
+                    
+                    setTimeout(function() {
+                        oDialog.removeStyleClass("sapUiInvisibleText");
+                        oDialog.setVisible(true); // Başlangıçta görünmez olan dialogu görünür yap (bug fix)
+                        console.log("Dialog başlangıçta kapalı");
+                    }, 0);
+                }
+
+                if (oBusyIndicator) {
+                    oBusyIndicator.setVisible(false);
+                }
+            
+            
             console.log("onAfterRendering bitti");
+        },
+
+        addFavourite: function(oEvent) {
+            var oButton = oEvent.getSource();
+            var sIcon = oButton.getIcon();
+            var Processname, Jsondata;
+        
+            if (sIcon === "sap-icon://unfavorite") {
+                Processname = "ChangeActivity";
+                Jsondata = {
+                    islemId: oEvent.getSource().getBindingContext().getObject().islemId,
+                    pernr: oEvent.getSource().getBindingContext().getObject().pernr,
+                    calisanAdi: oEvent.getSource().getBindingContext().getObject().calisanAdi,
+                    musteri: oEvent.getSource().getBindingContext().getObject().musteri,
+                    baslama: oEvent.getSource().getBindingContext().getObject().baslama,
+                    asil_bitis: oEvent.getSource().getBindingContext().getObject().asil_bitis,
+                    isDetay: oEvent.getSource().getBindingContext().getObject().isDetay,
+                    islem: oEvent.getSource().getBindingContext().getObject().islem,
+                    durum: oEvent.getSource().getBindingContext().getObject().durum,
+                    efor: oEvent.getSource().getBindingContext().getObject().efor,
+                    musteri_yorumu: oEvent.getSource().getBindingContext().getObject().musteri_yorumu,
+                    personel_yorumu: oEvent.getSource().getBindingContext().getObject().personel_yorumu,
+                    fav: 1
+                };
+                MessageToast.show("Favorilere eklendi");
+            } else {
+                Processname = "ChangeActivity";
+                Jsondata = {
+                    islemId: oEvent.getSource().getBindingContext().getObject().islemId,
+                    pernr: oEvent.getSource().getBindingContext().getObject().pernr,
+                    calisanAdi: oEvent.getSource().getBindingContext().getObject().calisanAdi,
+                    musteri: oEvent.getSource().getBindingContext().getObject().musteri,
+                    baslama: oEvent.getSource().getBindingContext().getObject().baslama,
+                    asil_bitis: oEvent.getSource().getBindingContext().getObject().asil_bitis,
+                    isDetay: oEvent.getSource().getBindingContext().getObject().isDetay,
+                    islem: oEvent.getSource().getBindingContext().getObject().islem,
+                    durum: oEvent.getSource().getBindingContext().getObject().durum,
+                    efor: oEvent.getSource().getBindingContext().getObject().efor,
+                    musteri_yorumu: oEvent.getSource().getBindingContext().getObject().musteri_yorumu,
+                    personel_yorumu: oEvent.getSource().getBindingContext().getObject().personel_yorumu,
+                    fav: 0
+                };
+                MessageToast.show("Favorilerden kaldırıldı");
+            }
+        
+            // Request işlemini ekleyelim
+            var that = this;
+            this.request(Processname, Jsondata)
+                .then(function(result) {
+                    console.log("Request başarılı: ", result);
+                    
+                       
+                        that.onRequestButtonPress();
+                       
+                  
+                })
+                .catch(function(error) {
+                    console.error("Request başarısız: ", error);
+                    MessageToast.show("Request başarısız: " + JSON.stringify(error));
+        
+                
+                    oButton.setIcon(sIcon);
+                });
+        },
+        
+        
+        onOpenFilterPopover: function(oEvent) {
+            if (!this._oFilterPopover) {
+                this._oFilterPopover = this.byId("filterPopover");
+                
+            }
+            this._oFilterPopover.openBy(oEvent.getSource());
+        },
+
+        onFilter: function() {
+           this.applyInitialFilters();
+        },
+
+        applyInitialFilters: function() {
+            var oTable = this.byId("employeeTable");
+            var oBinding = oTable.getBinding("items");
+        
+            var aFilters = [];
+           
+    var filterBilinmiyor = new sap.ui.model.Filter({
+        filters: [
+            new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, ""),
+            new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, null),
+          
+        ],
+        and: false
+    });
+
+    // Başlanmadı durumu için 0 değeri
+    if (this.byId("filterBaslanmadi").getSelected()) {
+        aFilters.push(new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, "0"));
+    }
+
+    // Diğer filtre seçenekleri
+    if (this.byId("filterBeklemede").getSelected()) {
+        aFilters.push(new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, 1));
+    }
+    if (this.byId("filterDevam").getSelected()) {
+        aFilters.push(new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, 2));
+    }
+    if (this.byId("filterTamamlandi").getSelected()) {
+        aFilters.push(new sap.ui.model.Filter("islem", sap.ui.model.FilterOperator.EQ, 3));
+    }
+    if (this.byId("filterBilinmiyor").getSelected()) {
+        aFilters.push(filterBilinmiyor);
+    }
+        
+            // Filtreleri birleştirip or (veya) olarak ayarlanıyor
+            if (aFilters.length > 0) {
+                oBinding.filter(new sap.ui.model.Filter({
+                    filters: aFilters,
+                    and: false
+                }));
+            }
+            // Tamamlandı olanı eklemiyoruz çünkü false
+            var oFinalFilter = new sap.ui.model.Filter(aFilters, false);
+            oBinding.filter(oFinalFilter);
+
+            this.updateFavouriteIcons();
         },
         
         onSuggest: function(oEvent) {
@@ -91,16 +293,30 @@ sap.ui.define([
         },
         
         onComboBoxChange: function(oEvent) {
-            // Değişiklik işlevi
+            var oComboBox = oEvent.getSource();
+            var sPath = oComboBox.getSelectedItem().getBindingContext("musteriModel").getPath();
+            var oSelectedItem = oComboBox.getModel("musteriModel").getProperty(sPath);
+          
+
+         
+            this.getView().byId("inputPernr").setValue(oSelectedItem.pernr);
+            this.getView().byId("inputName").setValue(oSelectedItem.ename);
+
+            console.log("aaa")
+                   
+            
+        },
+
+        onComboBoxChange1: function(oEvent) {
+            var oComboBox = oEvent.getSource();
+            var sPath = oComboBox.getSelectedItem().getBindingContext("musteriModel").getPath();
+            var oSelectedItem = oComboBox.getModel("musteriModel").getProperty(sPath);
+        
+            this.getView().byId("dialogPernr").setValue(oSelectedItem.pernr);
+            this.getView().byId("dialogName").setValue(oSelectedItem.ename);
+            
         },
         
-        
-        
-        
-
-        
-         
-
          request: async function (processName, postData) {
             if (!this.service) {
                 this.service = this.getOwnerComponent().getModel();
@@ -199,6 +415,11 @@ sap.ui.define([
             var sPersonelYorumu = this.byId("dialogPersonelYorumu").getValue();
             var that = this;
 
+            if(sMusteri == ""){
+                MessageToast.show("Müşteri adı boş olamaz.");
+                return;
+            }
+
             if (!sBegDate || !sEndDate) {
                 MessageToast.show("Lütfen başlangıç ve bitiş tarihlerini seçin.");
                 return;
@@ -213,7 +434,6 @@ sap.ui.define([
             var Jsondata ={
                 islem_id : sId,
                 pernr : sPernr,
-                // departman : sDepartman,
                 musteri : sMusteri,
                 baslama : sBegDate,
                 asil_bitis : sEndDate,
@@ -226,7 +446,7 @@ sap.ui.define([
             }
             try{
                 let result = that.request.bind(that)(Processname, Jsondata);
-                MessageToast.show("Ekleme Başarılı");
+                MessageToast.show("Düzenleme Başarılı");
                 console.log("Eklendi", result);
                 setTimeout(function() {
                     that.onRequestButtonPress();
@@ -302,15 +522,37 @@ sap.ui.define([
             }
         },
 
+
+        
         onColumnHeaderPress: function (oEvent) {
             var sColumnKey = oEvent.getSource().getCustomData()[0].getValue();
+            sortCounter++;
             this._sortTable(sColumnKey);
         },
         
         _sortTable: function (sColumn) {
             var oTable = this.byId("employeeTable"); 
             var oBinding = oTable.getBinding("items");
-            var oSorter = new sap.ui.model.Sorter(sColumn);
+
+            var bDescending = (sortCounter % 2) === 0;  // tek sayı ise false yani (a-z)
+            var oSorter = new sap.ui.model.Sorter(sColumn, bDescending);
+
+            oBinding.sort(oSorter);
+        },
+
+        onColumnHeaderPress1: function (oEvent) {
+            var sColumnKey = oEvent.getSource().getCustomData()[0].getValue();
+            sortCounter++;
+            this._sortTable1(sColumnKey);
+        },
+
+        _sortTable1: function (sColumn) {
+            var oTable = this.byId("miniTable"); 
+            var oBinding = oTable.getBinding("items");
+
+            var bDescending = (sortCounter % 2) === 0;  // tek sayı ise false yani (a-z)
+            var oSorter = new sap.ui.model.Sorter(sColumn, bDescending);
+
             oBinding.sort(oSorter);
         },
 
@@ -335,8 +577,8 @@ sap.ui.define([
 
             await this.request(Processname, Jsondata)
                 .then(function(result) {
-                // `result` verilerini `islemId`'ye göre filtreleme
-            var filteredLogs = result.filter(log => log.islemId ===  sicilNo);
+                // `result` verilerini `islemId`'ye göre filtreleme ve güncel logu üstte gösterme .reverse()
+            var filteredLogs = result.filter(log => log.islemId ===  sicilNo).reverse();
             console.log("Filtered Logs:", filteredLogs);
 
                 logModel = new JSONModel();
@@ -376,6 +618,7 @@ sap.ui.define([
             oFCL.addMidColumnPage(oDetailView);
             }
 
+           
 
             oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsBeginExpanded);
             oFCL.to(oDetailView.getId(), "MidColumn");
@@ -386,36 +629,73 @@ sap.ui.define([
 
         
         onRequestButtonPress: async function () {
-            // her tıklanıldığında güncel veriyi çeker 
-            var Processname = "GetList"; 
+            // her tıklanıldığında güncel veriyi çeker
+            var Processname = "GetList";
             var Jsondata = {};
             var that = this;
+        
             await this.request(Processname, Jsondata)
                 .then(function(result) {
-                var oModel = new JSONModel();
-                oModel.setData({ veriler: result});
-                that.getView().setModel(oModel);
-                console.log("Request başarılı: " + JSON.stringify(result));
+                    var oModel = new JSONModel();
+                    oModel.setData({ veriler: result });
+                    that.getView().setModel(oModel);
+
+                    that.applyInitialFilters();
+                    
+                    // "fav" değeri 1 olanları filtreler ve yeni bir model oluşturur
+                    var favMembers = result.filter(function(member) {
+                        return member.fav === "1";
+                    });
+                    var oFavModel = new JSONModel();
+                    oFavModel.setData({ favourites: favMembers });
+                    that.getView().setModel(oFavModel, "favourites");
+        
+                    console.log("Request başarılı: " + JSON.stringify(result));
+                    console.log("Favoriler modeli ayarlandı: ", that.getView().getModel("favourites").getData());
+
+                    that.updateFavouriteIcons();
                 })
                 .catch(function(error) {
-                MessageToast.show("Request başarısız: " + JSON.stringify(error));
+                    MessageToast.show("Request başarısız: " + JSON.stringify(error));
                 });
         },
-        onAdd: function () {
-            if (!this.byId("addDialog")) {
-                this.loadFragment({
-                    name: "project1.view.AddDialog"
-                }).then(function (oDialog) {
-                    this.getView().addDependent(oDialog);
-                    oDialog.open();
-                }.bind(this));
+
+        updateFavouriteIcons: function() {
+            var oTable = this.byId("employeeTable");
+            var oItems = oTable.getItems();
+            oItems.forEach(function(item) {
+                var oContext = item.getBindingContext();
+                var favValue = oContext.getProperty("fav");
+                var oButton = item.getCells()[0]; // Butonu index'i ile kontrol ediyoruz, güncelleme ile değişiklik gösterebilir diye
+        
+                if (favValue === "1") {
+                    oButton.setIcon("sap-icon://favorite");
+                } else {
+                    oButton.setIcon("sap-icon://unfavorite");
+                }
+            });
+        },
+        
+        
+        onAdd: function() {
+            var oDialog = this.byId("addDialog");
+        
+            if (oDialog) {
+                oDialog.open();
             } else {
-                this.byId("addDialog").open();
+                console.error("Dialog bulunamadı.");
             }
         },
+        
 
+        
+        
         onCancel: function () {
+
+            this.clearInputs();
             this.byId("addDialog").close();
+            
+            
         },
 
         onAddConfirm: function () {
@@ -424,6 +704,12 @@ sap.ui.define([
 
             var oBegDate = oView.byId("inputBegDate").getDateValue();
             var oEndDate = oView.byId("inputEndDate").getDateValue();
+            var oMusteri = oView.byId("inputMusteri").getValue();
+
+            if(oMusteri == ""){
+               MessageToast.show("Lütfen bir müşteri seçiniz.");
+               return;
+            }
 
             if (!oBegDate || !oEndDate) {
                 MessageToast.show("Lütfen başlangıç ve bitiş tarihlerini seçin.");
@@ -437,7 +723,7 @@ sap.ui.define([
 
             var oNewEntry = {
                 ID: oView.byId("inputID").getValue(),
-                Pernr : oView.byId("inputPernr").getValue(),
+                Pernr : oView.byId("inputPernr").getSelectedKey(),
                 Name: oView.byId("inputName").getValue(),
                 // departman : oView.byId("inputDepartman").getValue(),
                 Müşteri: oView.byId("inputMusteri").getValue(),
@@ -478,6 +764,7 @@ sap.ui.define([
                 setTimeout(function() {
                     that.onRequestButtonPress();
                 }, 500);
+                
             } catch(error)  {
                 MessageToast.show("Eklenemedi");
                 console.error("Eklenemedi", error);
@@ -487,7 +774,7 @@ sap.ui.define([
             this.clearInputs();
 
             this.byId("addDialog").close();
-            MessageToast.show("New entry added!");
+            
         },
 
         clearInputs: function () {
@@ -557,51 +844,104 @@ sap.ui.define([
             onAddClient: async function() {
                 var oView = this.getView();
                 var sName = oView.byId("musteriID").getValue();
-                console.log(sName);
-                
-                var Processname = "AddClient";
-                var Jsondata = {
-                    musteri_ad: sName
+                if(sName === ""){
+                    MessageToast.show("Müşteri adı boş olamaz.");
+                    return;
                 }
+                console.log(sName);
             
-                var that = this; // Mevcut scope referansı
+                var Processname = "AddClient";
+                var Jsondata = { musteri_ad: sName }
+            
+                var that = this; 
+            
+                // Önce mevcut müşteri modelini al ve aynı isimde müşteri olup olmadığını kontrol et
+                var oClientModel = that.getView().getModel("clientModel");
+                var aClients = oClientModel.getProperty("/clients");
+                var lowerCaseName = sName.toLowerCase();
+                var existingClient = aClients.find(client => client.musteriAd.toLowerCase() === lowerCaseName);
+            
+                if (existingClient) {
+                    MessageToast.show("Zaten bu müşteri mevcut");
+                    return;
+                }
+
+               
             
                 await this.request(Processname, Jsondata)
-                .then(async function(result) {
-                    console.log("Müşteri Eklendi " + JSON.stringify(result));
-                    
-                    // Önce mevcut müşteri modelini güncelle
-                    var oClientModel = that.getView().getModel("clientModel");
-                    var aClients = oClientModel.getProperty("/clients");
-                    aClients.push({ musteriId: result.musteriId, musteriAd: sName }); // Yeni müşteri bilgilerini ekle
-                    oClientModel.setProperty("/clients", aClients);
+                    .then(async function(result) {
+                        console.log("Müşteri Eklendi " + JSON.stringify(result));
             
-                    // ComboBox'ları yeniden bağla
-                    ["inputMusteri", "dialogMusteri"].forEach(function(comboBoxId) {
-                        var oComboBox = that.byId(comboBoxId);
-                        oComboBox.bindItems({
-                            path: "clientModel>/clients",
-                            template: new sap.ui.core.ListItem({
-                                key: "{clientModel>musteriId}",
-                                text: "{clientModel>musteriAd}"
-                            })
+                        // Yeni müşteri bilgilerini ekle
+                        aClients.push({ musteriId: result.musteriId, musteriAd: sName });
+                        oClientModel.setProperty("/clients", aClients);
+            
+                        // ComboBox'ları yeniden bağla
+                        ["inputMusteri", "dialogMusteri"].forEach(function(comboBoxId) {
+                            var oComboBox = that.byId(comboBoxId);
+                            oComboBox.bindItems({
+                                path: "clientModel>/clients",
+                                template: new sap.ui.core.ListItem({
+                                    key: "{clientModel>musteriId}",
+                                    text: "{clientModel>musteriAd}"
+                                })
+                            });
                         });
+            
+                        oView.byId("musteriID").setValue("");
+
+                        oView.byId("inputMusteri").setValue(sName);
+            
+                        MessageToast.show("Müşteri Eklendi");
+                    })
+                    .catch(function(error) {
+                        MessageToast.show("Request başarısız: " + JSON.stringify(error));
                     });
 
-                    oView.byId("musteriID").setValue("");
-            
-                    MessageToast.show("Müşteri Eklendi");
-                })
-                .catch(function(error) {
-                    MessageToast.show("Request başarısız: " + JSON.stringify(error));
-                });
-            
                 this.byId("addClientDialog").close();
-            }
+            },
+
+
+            onOpenFavourite: function () {
+                var oSplitterLayoutData = this.byId("favouriteSplitter");
+                var currentSize = oSplitterLayoutData.getSize();
             
+                if (currentSize === "0px") {
+                    oSplitterLayoutData.setSize("25%");
+                    var ProcessnameList = "GetList";
+                    var JsondataList = {};
+                    
+                    this.request(ProcessnameList, JsondataList)
+                        .then(function(result) {
+                            console.log("Request başarılı: ", result);
+                            
+                            var favMembers = result.filter(function(member) {
+                                return member.fav === "1";
+                            });
+                            var oFavModel = new JSONModel();
+                            oFavModel.setData({ favourites: favMembers });
+                            this.getView().setModel(oFavModel, "favourites");
+                            
+                            console.log("Favoriler modeli ayarlandı: ", this.getView().getModel("favourites").getData());
+                        }.bind(this))
+                        .catch(function(error) {
+                            console.error("Request başarısız: ", error);
+                            MessageToast.show("Request başarısız: " + JSON.stringify(error));
+                        });
+                } else {
+                   
+                    oSplitterLayoutData.setSize("0px");
+                }
+            },
             
-        
-       
+
+            closeSplit: function () {
+                var oSplitterLayoutData = this.byId("favouriteSplitter");
+                oSplitterLayoutData.setSize("0px");
+                
+
+           
+            },
 
      });
  });

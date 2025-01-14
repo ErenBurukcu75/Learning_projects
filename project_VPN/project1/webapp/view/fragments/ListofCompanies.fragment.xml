@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Popover
+        id="listOfCompaniesPopover"
+        placement="PreferredBottomOrFlip"
+        showHeader="false"
+        showArrow="false"
+    >
+        <List
+            id="fragment-list"
+            items="{deneme>/custx}"
+            itemPress=".openDetailsPopover"
+        >
+            <StandardListItem
+                id="listItem"
+                title="{deneme>name}"
+                type="Active"
+            />
+        </List>
+    </Popover>
+</core:FragmentDefinition>

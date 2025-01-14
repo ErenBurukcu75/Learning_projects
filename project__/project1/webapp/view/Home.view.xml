@@ -1,42 +1,65 @@
-<mvc:View
+<mvc:View xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
     controllerName="project1.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns="sap.m"
     xmlns:f="sap.f"
 	xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
     xmlns:table="sap.ui.table">
+
+    <VBox id="busyIndicatorContainer" class="centerContent" visible="false">
+        <BusyIndicator id="busyIndicator"/>
+    </VBox>
+    <l:ResponsiveSplitter  >
+    	<l:PaneContainer orientation="Vertical" >
+
+   
+      <l:SplitPane requiredParentWidth="400" id="default">
     <f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
 		<!-- DynamicPage Title -->
 		<f:title>
 			<f:DynamicPageTitle>
 				<f:heading>
-					<Title text="Employee Table"/>
+					<Title text="To-Do List"/>
 				</f:heading>
 			</f:DynamicPageTitle>
 		</f:title>
 
 		<!-- DynamicPage Content -->
 		<f:content>
-			<VBox fitContainer="true">
-				<OverflowToolbar class="sapFDynamicPageAlignContent">
+        	<smartTable:SmartTable entitySet="a" placeToolbarInTable="true" useTablePersonalisation="true"
+    showTablePersonalisation="false" class="sapUiResponsiveContentPadding" useVariantManagement="false"
+    showFullScreenButton="false" enableCustomFilter="false" showDetailsButton="false"
+    showVariantManagement="false" showPasteButton="false" useExportToExcel="false" enableCopy="false"
+    >
+			
+                	<smartTable:customToolbar >
+				<OverflowToolbar id="stickyToolbar" class="sapFDynamicPageAlignContent " >
+                    <OverflowToolbarButton icon="sap-icon://favorite-list" text="openlist" press=".onOpenFavourite"/>
 					<ToolbarSpacer/>
 					<SearchField search=".onSearch" width="17.5rem"/>
 					
 					<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>
-					<OverflowToolbarButton icon="sap-icon://sort" text="Sort" type="Transparent" press=".openPopover"/>
+                    <OverflowToolbarButton icon="sap-icon://filter" text="Filter" type="Transparent" press=".onOpenFilterPopover"/>
+                    
                     
 				</OverflowToolbar>
+                	</smartTable:customToolbar>
+              
 				<Table mode="SingleSelectMaster" selectionChange="onRowSelect"
 					id="employeeTable"
 					inset="false"
 					items="{/veriler}"
 					class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
 					width="auto"
-                    growing="true"
-    growingScrollToLoad="true"
-    fixedLayout="false"
+                    sticky="ColumnHeaders,HeaderToolbar"
+                    growing="false"
+                    fixedLayout="false"
                    >
 					<columns>
+                    <Column >
+                    </Column>
                 <Column >
                     <header>
                         <Link text="ID" press=".onColumnHeaderPress" class="customLink">
@@ -138,6 +161,7 @@
 					<items>
 						<ColumnListItem >
 							<cells>
+                            <Button icon="sap-icon://unfavorite" press=".addFavourite"/>
 							<Text text="{islemId}"/>
                             <Text text="{pernr}"/>
 							<Text text="{calisanAdi}"/>
@@ -166,8 +190,10 @@
 					</items>
                     
 				</Table>
-			</VBox>
+			
+            </smartTable:SmartTable>
 		</f:content>
+        
 
 		<!-- DynamicPage Footer -->
 		<f:footer >
@@ -178,22 +204,183 @@
 			</OverflowToolbar>
 		</f:footer>
 	</f:DynamicPage>
+    </l:SplitPane>
+    
+   
+   
+    <l:SplitPane class="splitterContainer">
+  <l:layoutData>
+    <l:SplitterLayoutData id="favouriteSplitter" size="0px"/>
+  </l:layoutData>
+  <Panel class="panelContainer" headerText="Favoriler Sayfası">
+    <FlexBox
+      id="headerContainer"
+      width="100%"
+      justifyContent="End"
+      >
+      <OverflowToolbarButton id="favouriteButton" text="Content 1" icon="sap-icon://decline" press=".closeSplit" />
+    </FlexBox>
+    <VBox
+      id="tableContainer"
+      width="100%"
+      >
+      <Table
+        id="miniTable"
+        inset="false"
+        class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
+        width="100%"
+        sticky="ColumnHeaders,HeaderToolbar"
+        growing="false"
+        fixedLayout="false"
+        items="{favourites>/favourites}">
+        <columns>
+          <Column >
+                    <header>
+                        <Link text="ID" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="islemId"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column >
+                    <header>
+                        <Link text="Sicil No" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="pernr"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="İsim" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="calisanAdi"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Müşteri" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="musteri"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Başlama Tarihi" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="baslama"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="Bitiş Tarihi" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="asilBitis"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column>
+                    <header>
+                        <Link text="İş Detay" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="isDetay"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column  >
+                    <header>
+                        <Link text="Durum Önemi" press=".onColumnHeaderPress1" class="customLink">
+                            <customData>
+                                <core:CustomData key="columnKey" value="durum"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column >
+                    <header>
+                        <Link text="Efor" press=".onColumnHeaderPress1" class="customLink" >
+                            <customData>
+                                <core:CustomData key="columnKey" value="efor"/>
+                            </customData>
+                        </Link>
+                    </header>
+                </Column>
+                <Column >
+                    <header>
+                      <Link text="İşlem Önemi" press=".onColumnHeaderPress1" class="customLink">
+                          <customData>
+                            <core:CustomData key="columnKey" value="islem"/>
+                          </customData>
+                      </Link>
+                    
+                    </header>
+                </Column>
+        </columns>
+        <items>
+          <ColumnListItem>
+            <cells>
+                            <Text text="{favourites>islemId}"/>
+                            <Text text="{favourites>pernr}"/>
+							<Text text="{favourites>calisanAdi}"/>
+                           
+                            <Text text="{favourites>musteri}"/>
+                            <Text text="{path: 'favourites>baslama', formatter: '.formatter.formatDate'}"/>
+                            <Text text="{path: 'favourites>asilBitis', formatter: '.formatter.formatDate'}"/>
+                            <Text text="{favourites>isDetay}" class="customText"/>  
+						<ObjectStatus
+							class="customObjectStatus"
+							text="{path: 'favourites>durum', formatter: '.formatter.formatOnemlilik'}"
+							state="{path: 'favourites>durum', formatter: '.formatter.formatOnemlilikState'}" /> 
+						    <Text text="{favourites>efor}"/>
+                            <ObjectStatus
+                            class="customObjectStatus"
+                            text="{path: 'favourites>islem', formatter: '.formatter.formatDurum'}"
+                            state="{path: 'favourites>islem', formatter: '.formatter.formatDurumState'}"/>
+                          
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </VBox>
+  </Panel>
+</l:SplitPane>
 
-	 <Dialog id="addDialog" title="Add New Entry">
+        
+    
+        
+   </l:PaneContainer>
+ </l:ResponsiveSplitter>
+
+
+ <Dialog id="addDialog" title="Yeni Kullanıcı Ekleme" visible="false">
         <VBox class= "sapUiSmallMargin">
             <Label text="ID"/>
             <Input id="inputID" editable="false"/>
             <Label text="Sicil no "/>
-            <Input id="inputPernr"/>
+            <HBox width="100%" >
+                    
+                    <ComboBox width="17.5rem" id="inputPernr"   change="onComboBoxChange"  placeholder="Çalışan Seçiniz...">
+        
+                    </ComboBox>
+                    </HBox>
             <Label text="İsim"/>
-            <Input id="inputName" editable="false"/>
+            <Input id="inputName" editable="false"  />
             
          <Label text="Müşteri"/>
         <HBox width="100%" >
-                <ComboBox class = "sapUiTinyMarginEnd" width="15rem" id="inputMusteri" change="onComboBoxChange" placeholder="Müşteri Seçiniz...">
+                <ComboBox class = "sapUiTinyMarginEnd" width="15rem" id="inputMusteri"  placeholder="Müşteri Seçiniz...">
                    
                         <core:ListItem key="{clientModel>musteriId}" text="{clientModel>musteriAd}" />
-                   
                 </ComboBox>
         
                 <Button icon="sap-icon://add" press="onAddButtonPress"/>
@@ -210,6 +397,7 @@
                     <core:Item key="1" text="Beklemede"/>
                     <core:Item key="2" text="Devam ediyor"/>
                     <core:Item key="3" text="Tamamlandı"/>
+                    
                 </items>
             </ComboBox>
             <Label text="Durum"/>
@@ -238,6 +426,11 @@
         </beginButton>
     </Dialog>
 
+
+
+
+	 
+
 	<Popover id="sortPopover" placement="Bottom" title="Filtre Sıralaması">
     <VBox>
         <RadioButton text="ID" groupName="sortGroup"  select=".oRadioButtonSelect"/>
@@ -251,18 +444,24 @@
 
     
 
-        <Dialog id="myDialog1" title="My Popup">
+        <Dialog id="myDialog1" title="My Popup" >
             <VBox class= "sapUiSmallMargin">
                     <Label text="ID"/>
                     <Input id="dialogId" editable="false" />
                     <Label text="Sicil no"/>
-                    <Input id="dialogPernr"/>
+                     <HBox width="100%" justifyContent="SpaceBetween">
+                    
+                    <ComboBox id="dialogPernr" width="17.5rem"  change="onComboBoxChange1"  placeholder="Çalışan Seçiniz...">
+                        <core:ListItem key="{musteriModel>musteriId}" text="{musteriModel>musteriEname}" />
+                    </ComboBox>
+                    </HBox>
+                    
                     <Label text="Name"/>
                     <Input id="dialogName"   editable="false"/>
                     <Label text="Müşteri"/>
                 <HBox width="100%" justifyContent="SpaceBetween">
                     
-                    <ComboBox id="dialogMusteri" width="100%"  change="onComboBoxChange"  placeholder="Müşteri Seçiniz...">
+                    <ComboBox id="dialogMusteri"  class = "sapUiTinyMarginEnd" width="15rem"    placeholder="Müşteri Seçiniz...">
                         <core:ListItem key="{clientModel>musteriId}" text="{clientModel>musteriAd}" />
                     </ComboBox>
                     <Button icon="sap-icon://add" press="onAddButtonPress"/>
@@ -282,6 +481,7 @@
                     <core:Item key="1" text="Beklemede"/>
                     <core:Item key="2" text="Devam ediyor"/>
                     <core:Item key="3" text="Tamamlandı"/>
+                 
                 </items>
             </ComboBox>
             <Label text="Durum"/>
@@ -323,5 +523,25 @@
           </beginButton>
           
        </Dialog>
+
+      
+
 </Popover>
+<Popover id="filterPopover" title="Filtreler" placement="Bottom" showHeader="true">
+    <VBox class="sapUiSmallMargin" width="7em">
+        <CheckBox text="Başlanmadı" selected="true" id="filterBaslanmadi" />
+        <CheckBox text="Beklemede" selected="true" id="filterBeklemede" />
+        <CheckBox text="Devam Ediyor" selected="true" id="filterDevam" />
+        <CheckBox text="Tamamlandı" selected="false" id="filterTamamlandi" />
+        <CheckBox text="Bilinmiyor" selected="true" id="filterBilinmiyor"/>
+    </VBox>
+    <VBox  width="100%">
+        <HBox justifyContent="Center" width="100%" class="sapUiSmallMarginBottom">
+            <Button text="Apply" press="onFilter"/>
+        </HBox>
+    </VBox>
+</Popover>
+
+
+
 </mvc:View>

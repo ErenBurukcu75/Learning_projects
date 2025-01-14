@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog id="deleteCardDialog" title="Kart Ekle" >
+        <content>
+            <VBox class="sapUiSmallMargin">
+                 <Text text="Seçtiğiniz kartı silmek istiyor musunuz?"/>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="Sil" press="onDeleteCardPress"/>
+        </beginButton>
+        <endButton>
+            <Button text="İptal" press="onCloseCardPress"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

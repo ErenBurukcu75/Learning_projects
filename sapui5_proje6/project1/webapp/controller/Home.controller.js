@@ -199,13 +199,11 @@ sap.ui.define([
             this.request("GetList", Jsondata)
                 .then(function(result) {
                 var oModel = new JSONModel();
-                // result.forEach((element,i,arr) =>{
-
-                //     arr[i].new = "X"
-                // });
+            
                 oModel.setData({ veriler: result});
                 that.getView().setModel(oModel);
                 console.log("Request başarılı: " + JSON.stringify(result));
+                console.log("test : " + oModel)
                 })
                 .catch(function(error) {
                 MessageToast.show("Request başarısız: " + JSON.stringify(error));

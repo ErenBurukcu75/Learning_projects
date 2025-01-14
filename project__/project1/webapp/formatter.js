@@ -46,9 +46,9 @@ sap.ui.define([], function () {
         formatOnemlilikState: function (value) {
             switch (value) {
                 case "0":
-                    return "Success"; // Yeşil
+                    return "None"; // case 1 e taşı burayı none yap
                 case "1":
-                    return "Information"; // Mavi
+                    return "Success"; // Mavi
                 case "2":
                     return "Warning"; // Sarı
                 case "3":
@@ -78,9 +78,9 @@ sap.ui.define([], function () {
                 case "0":
                     return "Error"; // Kırmızı
                 case "1":
-                    return "Warning"; // Sarı
+                    return "None"; // Sarı
                 case "2":
-                    return "Information"; // Mavi
+                    return "Warning"; // Mavi
                 case "3":
                     return "Success"; // Yeşil
                 default:

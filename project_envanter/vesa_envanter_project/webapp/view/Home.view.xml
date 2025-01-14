@@ -1,0 +1,109 @@
+<mvc:View controllerName="vesaenvanterproject.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:cssgrid="sap.ui.layout.cssgrid"
+    xmlns:t="sap.tnt"
+    xmlns:cards="sap.f.cards"
+    xmlns:core="sap.ui.core"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:f="sap.f">
+    <Page id="page" title="{i18n>title}">
+        <Panel backgroundDesign="Transparent"> 
+        <headerToolbar >
+           <Toolbar class="sapUiSmallMarginBottom" height="4rem">
+            <ToolbarSpacer />
+                    <Title
+                        text="Proje Deneme"
+                        level="H2"
+                    />
+                    <ToolbarSpacer />
+           
+           </Toolbar>
+        
+        </headerToolbar>
+
+
+       
+        <f:GridList
+                id="persoList"
+                items="{test>/items}"
+            >
+              <f:customLayout> 
+						<cssgrid:GridBasicLayout  gridAutoRows="5rem" gridTemplateColumns="repeat(auto-fill, minmax(5rem, 1fr))" gridGap="0.21rem"></cssgrid:GridBasicLayout>
+					</f:customLayout>
+                <f:items>
+                
+                    <CustomListItem
+                        id="asdasd"
+                        type="Active"
+                        press=".onTilePress"
+                        class=" myCustomListItem sapUiTinyMarginBegin "
+                    >
+                        <layoutData>
+                            <cssgrid:GridItemLayoutData gridRow="span 3" gridColumn="span 3" />
+                            
+                        </layoutData>
+                        <VBox
+                            class="sapUiSmallMarginTop sapUiSmallMarginBegin sapUiSmallMarginEnd"
+                        >
+                            <HBox>
+                                <core:Icon
+                                    src="sap-icon://internet-browser"
+                                    size="2rem"
+                                    class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                                />
+                                <Title
+                                    text="{test>title}"
+                                    wrapping="true"
+                                    class=" sapUiTinyMarginTop sapUiSmallMarginBegin sapUiMediumMarginEnd"
+                                    level="H2"
+                                />
+                            </HBox>
+                            <Label
+                                text="{test>subtitle}"
+                                wrapping="true"
+                                class=" sapUiMediumMarginBottom sapUiTinyMarginBegin"
+                            />
+                            <Text
+                                text="{test>description}"
+                                wrapping="true"
+                                class=" sapUiTinyMarginBegin"
+                            />
+                        </VBox>
+                        <HBox justifyContent="SpaceBetween">
+                            <VBox
+                                justifyContent="SpaceBetween"
+                                class="sapUiSmallMarginTop sapUiTinyMarginBegin"
+                            >
+                                <OverflowToolbar
+                                    design="Transparent"
+                                    style="Clear"
+                                    class=" sapUiMediumMarginBegin sapUiMediumMarginTop"
+                                >
+                                    <ToolbarSpacer />
+                                    <Button
+                                        
+                                        icon="sap-icon://edit"
+                                        type="Transparent"
+                                        press=".editVSQ"
+                                    />
+                                    <Button
+                                        
+                                        icon="sap-icon://delete"
+                                        type="Transparent"
+                                        press=".deleteClientFragment"
+                                    />
+                                    <Button
+                                        icon="sap-icon://share-2"
+                                        type="Transparent"
+                                    />
+                                </OverflowToolbar>
+                            </VBox>
+                        </HBox>
+                    </CustomListItem>
+                </f:items>
+            </f:GridList>
+        </Panel>
+    </Page>
+</mvc:View>

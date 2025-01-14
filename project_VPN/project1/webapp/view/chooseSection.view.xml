@@ -1,0 +1,28 @@
+<mvc:View xmlns:calendar="sap.ui.unified.calendar" xmlns:cards="sap.f.cards" controllerName="vesaprem.controller.chooseSection" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:l="sap.ui.layout" 
+xmlns:t="sap.tnt" 
+xmlns="sap.m" 
+xmlns:core="sap.ui.core" 
+xmlns:grid="sap.ui.layout.cssgrid" 
+xmlns:f="sap.f" 
+displayBlock="true">
+  <Page showNavButton="true" navButtonPress=".onNavBack" title="Choose Section for {company>/name}">
+    <Panel width="100%" backgroundDesign="Transparent" height="100%" >
+    
+      <VBox height="100%" alignItems="Center" >
+          <core:Icon src="" size="1em" />
+          <Title text="(logo gelicek) {company>/name}" class="sapUiLargeMargin fontSize"/>
+       
+           
+           <HBox justifyContent="Center" alignItems="Center" height="40%" >
+             <Button text="VPN" class="sapUiLargeMargin" press="onVPNPress"></Button>
+             <Button text="Logon/Login" class="sapUiLargeMargin" press="onSystemInfoPress"></Button>
+             
+           </HBox>
+        
+      </VBox>
+      
+    </Panel>
+  </Page>
+</mvc:View>

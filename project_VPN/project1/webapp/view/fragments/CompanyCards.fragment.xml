@@ -1,0 +1,108 @@
+<core:FragmentDefinition 	xmlns:cssgrid="sap.ui.layout.cssgrid" xmlns:m="sap.m" xmlns:f="sap.f" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+  <m:Dialog id="CompanyCardsDialog" title="Company Cards" draggable="true"  contentWidth="1160px" contentHeight="780px">
+    <!-- VPN Ekleme Paneli -->
+    <m:HBox >
+      <m:Panel class="sapUiTinyMargin sapUiSmallMarginTop sapUiMediumMarginBegin sapUiSmallMarginEnd customPanel" width="383px" >
+        <m:content>
+          <m:VBox class="sapUiSmallMargin" justifyContent="SpaceBetween">
+            <m:HBox justifyContent="Center">
+              <core:Icon src="sap-icon://business-card" class="customIcon"/>
+              <m:Title text="VPN EKLE" level="H3"/>
+            </m:HBox>
+            <m:VBox>
+              <m:Label text="Başlık :" class="sapUiTinyMarginTop"/>
+              <m:Input id="inputTitle" placeholder="Başlık" width="17.2em"/>
+              <m:Label text="ID : " class="sapUiTinyMarginTop"/>
+              <m:Input id="inputId" placeholder="Kullanıcı Adı" width="17.2em"/>
+              <m:VBox class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+                <m:Label text="Password : "/>
+                <m:HBox>
+                  <m:Input id="passwordInput" placeholder="Şifre" type="Password" width="17.2em" value="{/password}" class="inputWithMargin"/>
+                  <m:Button icon="sap-icon://show" press="onTogglePasswordVisibility" class="buttonWithMargin">
+                    <m:customData>
+                      <core:CustomData key="inputId" value="passwordInput"/>
+                    </m:customData>
+                  </m:Button>
+                </m:HBox>
+              </m:VBox>
+              <m:VBox class="sapUiTinyMarginBottom">
+                <m:Label text="Re-Password : "/>
+                <m:HBox>
+                  <m:Input id="rePasswordInput" placeholder="Şifre" width="17.2em" type="Password" value="{/rePassword}" class="inputWithMargin"/>
+                  <m:Button icon="sap-icon://show" press="onTogglePasswordVisibility" class="buttonWithMargin">
+                    <m:customData>
+                      <core:CustomData key="inputId" value="rePasswordInput"/>
+                    </m:customData>
+                  </m:Button>
+                </m:HBox>
+              </m:VBox>
+              <m:Label text="Not : "/>
+              <m:TextArea id="inputNote" placeholder="Detay notlar" rows="5" width="17.2em" class="sapUiTinyMarginBottom"/>
+              <m:HBox  class="sapUiSmallMarginTop sapUiLargeMarginEnd" >
+                <m:Button text="Kaydet" press="saveNewVPN" class="testtt"/>
+              </m:HBox>
+            </m:VBox>
+          </m:VBox>
+        </m:content>
+      </m:Panel>
+      <!-- Mevcut VPN Kayıtları Paneli -->
+      <m:Panel class="sapUiTinyMargin sapUiSmallMarginTop  customPanel testtttt customPaddingPanel" width="685px" height="750px" >
+        <m:content>
+          <m:VBox class="sapUiSmallMargin stickySearchField" height="120px" justifyContent="Center" >
+            <m:HBox justifyContent="Center" >
+              <core:Icon src="sap-icon://globe" class="customIcon"/>
+              <m:Title text="Mevcut VPN kayıtları" level="H1"/>
+            </m:HBox>
+           
+            <m:SearchField search="onSearch" class=" sapUiSmallMarginTop"></m:SearchField>
+            
+          </m:VBox>
+          <f:GridList 
+          
+          id="existingVpnContainer" 
+          class="sapUiSmallMargin DENEMEEE"  
+          width="600px"
+          noDataText="Veri Bulunamadı"
+        
+          xmlns:layout="sap.ui.layout.form"
+          items="{vpn>/veriler}">
+          <f:customLayout> 
+						<cssgrid:GridBasicLayout  gridAutoRows="5rem" gridTemplateColumns="repeat(auto-fill, minmax(5rem, 1fr))" gridGap="1.5rem"></cssgrid:GridBasicLayout>
+					</f:customLayout>
+            <m:CustomListItem >
+            <m:layoutData >
+							<cssgrid:GridItemLayoutData gridRow="span 3" gridColumn="span 3"/>
+						</m:layoutData>
+    <m:Panel class="sapUiTinyMarginBottom panelBorder">
+        <m:headerToolbar>
+            <m:Toolbar>
+                <m:Title text="{vpn>usr01}" level="H2"/>
+                <m:ToolbarSpacer/>
+                <m:Button icon="sap-icon://edit"/>
+                <m:Button icon="sap-icon://delete"/>
+            </m:Toolbar>
+        </m:headerToolbar>
+        <m:VBox justifyContent="Center" alignItems="Center" alignContent="Center" class="sapUiSmallMarginTop">
+            <layout:SimpleForm>
+                <layout:content >
+                    <m:Label text="ID" class="sapUiTinyMarginBottom"/>
+                    <m:Text text="{vpn>ccnid}"/>
+                    <m:Label text="PASSWORD" class="sapUiTinyMarginBottom"/>
+                    <m:Text text="{vpn>psw01}"/>
+                    <m:Label text="NOT" class="sapUiTinyMarginBottom"/>
+                    <m:Text text="{vpn>cnote}"/>
+                </layout:content>
+            </layout:SimpleForm>
+        </m:VBox>
+    </m:Panel>
+</m:CustomListItem>
+
+          </f:GridList>
+        </m:content>
+      </m:Panel>
+    </m:HBox>
+    <m:endButton>
+      <m:Button text="Close" press="onCloseDialogPress"/>
+    </m:endButton>
+  </m:Dialog>
+</core:FragmentDefinition>

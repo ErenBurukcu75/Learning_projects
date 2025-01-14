@@ -1,0 +1,37 @@
+<mvc:View controllerName="vesaenvanterproject.controller.PcEnvanter"
+    displayBlock="true"
+    xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+    <Page id="" title="{i18n>title}"
+    showNavButton="true"
+    navButtonPress="onNavBack">
+        <content> 
+        	<List
+		id="ProductList"
+		
+		items="{/ProductCollection}"
+		includeItemInSelection="true">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Elektronik Ürünler Envanteri" level="H2"/>
+					<ToolbarSpacer />
+					
+                    <SearchField placeholder="Ürün Arama" width="15em"/>
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<StandardListItem
+			title="{Name}"
+			description="{ProductId}"
+			type="Navigation"
+			iconDensityAware="false"
+			iconInset="false"
+			press="handlePress"
+			detailPress="handleDetailPress" />
+	</List>
+        </content>
+    </Page>
+</mvc:View>

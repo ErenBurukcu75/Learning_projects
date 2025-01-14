@@ -100,7 +100,7 @@
 							<m:Table
 								id="logTable"
 								items="{logModel>/log}"
-								class="sapFDynamicPageAlignContent sapMListTblRowSingleSelectLeft"
+								
 								>
 								<m:columns>
 								

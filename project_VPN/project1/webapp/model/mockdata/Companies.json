@@ -1,0 +1,43 @@
+{
+  "companies": [
+    {
+      "id": "1",
+      "name": "AKFEN"
+    },
+    {
+      "id": "2",
+      "name": "ASELSAN"
+    },
+    {
+      "id": "3",
+      "name": "ANKUTSAN"
+    },
+    {
+      "id": "4",
+      "name": "ARAS"},
+      {
+        "id": "5",
+        "name": "BERLİN TİRES"
+      },
+      {
+        "id": "6",
+        "name": "BİLKENT"
+      },
+      {
+        "id": "7",
+        "name": "COCA COLA"
+      },
+      {
+        "id": "8",
+        "name": "ÇİMSA"
+      },
+      {
+        "id": "9",
+        "name": "DARPHANE"
+      },
+      {
+        "id": "10",
+        "name": "E-BEBEK"
+      }
+  ]
+}

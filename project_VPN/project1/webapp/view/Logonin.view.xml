@@ -1,0 +1,217 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:card="sap.f.cards"
+    xmlns:l="sap.ui.layout"
+    controllerName="vesaprem.controller.Logonin"
+>
+    <m:Page
+        showNavButton="true"
+        navButtonPress=".onNavBack"
+        title="{company>/title} > {company>/tileName}"
+    >
+        <l:DynamicSideContent
+            id="DynamicSideContent"
+            class="sapUiDSCExplored sapUiContentPadding "
+            sideContentFallDown="BelowM"
+            containerQuery="true"
+            breakpointChanged="handleBreakpointChanged"
+            equalSplit="true"
+        >
+            <!-- Logon Bilgisi -->
+            <m:Panel
+                headerText="Logon Bilgisi"
+                class="sapUiTinyMargin sapUiMediumMarginBottom customPanel denemePanel"
+                                
+            >
+                <m:content>
+                    <m:VBox
+                        class="sapUiSmallMargin"
+                        justifyContent="Center"
+                        binding="{path: 'logon>/veriler', templateShareable : false}"
+                        
+                    >
+                     
+                       
+                    
+                        <m:HBox width="100%" class="sapUiTinyMarginBottom">
+                         
+                            <m:Label
+                                text="Tanım:"
+                                width="200px"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <m:Input width="180px" id="tanim" editable="false" value="{logon>tanım}"  placeholder="Tanım" liveChange="testdeneme"/>
+                            <m:HBox width="100%"  justifyContent="End">
+                          <m:Button type="Transparent" icon="sap-icon://edit" press="setEditableInputs"></m:Button>
+                        
+                        </m:HBox>
+                        </m:HBox>
+                        <m:HBox class="sapUiTinyMarginBottom">
+                            <m:Label
+                                text="Uygulama Sunucusu:"
+                                width="200px"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <m:Input width="180px" id="uygulamaSunucusu" editable="false" value="{logon>uygulamaSunucusu}" placeholder="Sunucu" />
+                        </m:HBox>
+                        <m:HBox class="sapUiTinyMarginBottom">
+                            <m:Label
+                                text="Birim Numarası:"
+                                width="200px"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <m:Input width="180px" id="birimNumarasi" editable="false" value="{logon>birimNumarasi}" placeholder="Birim No" />
+                        </m:HBox>
+                        <m:HBox class="sapUiTinyMarginBottom">
+                            <m:Label
+                                text="Sistem Tanımı:"
+                                width="200px"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <m:Input width="180px" id="sistemTanimi" editable="false" value="{logon>sistemTanımı}" placeholder="Sistem Tanımı" />
+                        </m:HBox>
+                        <m:HBox class="sapUiTinyMarginBottom">
+                            <m:Label
+                                text="SAProuter dizilimi:"
+                                width="200px"
+                                class="sapUiTinyMarginTop"
+                            />
+                            <m:Input width="180px" id="logonSunucusu" editable="false" value="{logon>logonSunucusu}" placeholder="SAProuter" />
+                        </m:HBox>
+                    </m:VBox>
+                    <m:VBox justifyContent="End" alignContent="End" alignItems="End">
+                       <m:Button visible="false" id="saveLogonButton" text="Kaydet" press="helloworld"></m:Button>
+                    </m:VBox>
+                </m:content>
+            </m:Panel>
+
+            <!-- Login Bilgisi -->
+            <m:Panel
+                headerText="Login Bilgisi"
+                class="sapUiTinyMargin stickyClass customPanel denemePanel"
+            >
+                <m:content>
+                    <m:VBox height="300px">
+                        <m:Table
+                            id="loginDatas"
+                            items="{users>/items}"
+                            sticky="ColumnHeaders,HeaderToolbar"
+                            inset="false"
+                            growing="false"
+                        >
+                            <m:headerToolbar>
+                                <m:OverflowToolbar
+                                    class="sapUiTinyMarginBottom"
+                                    style="Standard"
+                                >
+                                    <m:ToolbarSpacer />
+                                    <m:SearchField
+                                        width="200px"
+                                        search="onSearch"
+                                        placeholder="Arama"
+                                    />
+                                    <m:Button icon="sap-icon://add" />
+                                </m:OverflowToolbar>
+                            </m:headerToolbar>
+                            <m:columns>
+                                <m:Column>
+                                    <m:Text text="Başlık" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Kullanıcı Adı" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Parola" />
+                                </m:Column>
+                                <m:Column>
+                                    <m:Text text="Not" />
+                                </m:Column>
+                                <m:Column width="40px" />
+                                <m:Column width="40px" />
+                            </m:columns>
+                            <m:items>
+                                <m:ColumnListItem>
+                                    <m:cells>
+                                        <m:Text text="{users>Baslik}" />
+                                        <m:Text text="{users>KullaniciAdi}" />
+                                        <m:Text text="{users>Parola}" />
+                                        <m:Text
+                                            class="sapUiTinyMarginBottom sapUiTinyMarginTop"
+                                            text="{users>Not}"
+                                        />
+                                        <m:Button
+                                            type="Transparent"
+                                            icon="sap-icon://edit"
+                                        />
+                                        <m:Button
+                                            type="Transparent"
+                                            icon="sap-icon://delete"
+                                        />
+                                    </m:cells>
+                                </m:ColumnListItem>
+                            </m:items>
+                        </m:Table>
+                    </m:VBox>
+                </m:content>
+            </m:Panel>
+
+            <l:sideContent>
+                <!-- İşlem Geçmişi -->
+                <m:Panel
+                    headerText="İşlem Geçmişi"
+                    class="sapUiTinyMargin stickyClass customPanel panelDeneme denemePanel"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <m:content>
+                        <m:HBox class="sapUiSmallMargin" height="607px">
+                            <m:Table
+                                items="{log>/items}"
+                                sticky="ColumnHeaders,HeaderToolbar"
+                                inset="false"
+                                growing="false"
+                            >
+                                <m:headerToolbar>
+                                    <m:OverflowToolbar
+                                        class="sapUiTinyMarginBottom"
+                                        style="Standard"
+                                    >
+                                        <m:ToolbarSpacer />
+                                        <m:SearchField
+                                            width="200px"
+                                            placeholder="Arama"
+                                        />
+                                    </m:OverflowToolbar>
+                                </m:headerToolbar>
+                                <m:columns>
+                                    <m:Column width="10em">
+                                        <m:Text text="Tarih" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="Saat" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="Değişiklik" />
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:Text text="{log>tarih}" />
+                                            <m:Text text="{log>saat}" />
+                                            <m:Text text="{log>degisiklik}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </m:HBox>
+                    </m:content>
+                </m:Panel>
+            </l:sideContent>
+        </l:DynamicSideContent>
+    </m:Page>
+</mvc:View>

@@ -1,0 +1,73 @@
+<mvc:View xmlns:calendar="sap.ui.unified.calendar" xmlns:cards="sap.f.cards" controllerName="vesaprem.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m">
+    <Page class="homeDeneme barDeneme" showHeader="true" showSubHeader="true" title="Müşteri ve Sistem Bilgileri" backgroundDesign="Solid">
+
+    <headerContent  >
+        
+        <ToolbarSpacer/>
+			<Input 
+            width="12em"
+            placeholder="Müşteri Adı Giriniz"
+            showSuggestion="true"
+            suggestionItemSelected="navToChooseSection"
+            suggestionItems="{
+            path: 'Musteriler>/sirketler'
+        
+            }">
+      	    <suggestionItems>
+				<SuggestionItem  text="{Musteriler>sirketAdi}"  />
+			</suggestionItems>
+            </Input>
+            <core:Icon 
+        class="customLink sapUiTinyMargin"
+        src="sap-icon://add"
+        press=".helloworld"
+        size="1em"/>
+        <Button text="deneme" press="getVPNTest"/>
+            
+		</headerContent>
+		<subHeader  >
+			<OverflowToolbar height="3em">
+				<HBox items="{path: 'Musteriler>/veriler'}" >
+        <items >
+            <Link 
+            class="customLink sapUiTinyMargin sapUiSmallMarginBottom asdasd"
+            text="{Musteriler>custLet}" press="openListOfCompanies"/>
+        </items>
+    </HBox>
+			</OverflowToolbar>
+		</subHeader>
+        
+        
+    
+
+
+
+
+       
+    <VBox  backgroundDesign="Solid" height="100%">
+    <!-- Diğer içerik -->
+    <Image
+          src="https://vesacons.com/wp-content/uploads/VESALOGO.jpg"
+          alt="Şirket Logosu"
+          class="resimClass"
+        
+          width="670px"
+          height="370px"
+         />
+    </VBox>
+
+    
+    
+    
+       
+    
+   
+
+
+
+    </Page>
+</mvc:View>
